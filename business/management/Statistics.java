@@ -1,10 +1,7 @@
 package business.management;
 
 /**
- * brief description of the class.
- *
- * (if necessary)
- * detailed description of the class purpose, functionality, usage
+ * Might be deleted and replaced by ui class
  *
  * @author NAME
  * @version 1.0
