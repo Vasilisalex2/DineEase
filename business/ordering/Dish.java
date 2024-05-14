@@ -17,7 +17,7 @@ public class Dish implements Cloneable{
     this.id = 0;
     this.quantity = 0;
   }
-  public int getID(){
+  public int getId(){
     return this.id;
   }
   public int getQuantity(){

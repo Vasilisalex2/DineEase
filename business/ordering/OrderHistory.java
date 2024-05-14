@@ -1,14 +1,18 @@
 package business.ordering;
 
+import java.util.ArrayList;
+
 /**
- * brief description of the class.
- *
- * (if necessary)
- * detailed description of the class purpose, functionality, usage
+ * Class that contains an arraylist of orders for the business
  *
  * @author NAME
  * @version 1.0
  */
 
 public class OrderHistory {
+    private ArrayList<Order> orders;
+
+    public ArrayList<Order> getOrders() {
+        return orders;
+    }
 }

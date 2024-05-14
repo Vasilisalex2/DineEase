@@ -15,7 +15,7 @@ import business.ordering.Order;
 public class Business {
     private int id;
     private Menu menu;
-    private TaskList taskList;
+    private TaskList taskList; //TODO why would the business have a tasklist? each worker has a separate tasklist
   public Business(int id){
       this.menu = new Menu();
       this.id = id;

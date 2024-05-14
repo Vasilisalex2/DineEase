@@ -14,8 +14,15 @@ import java.util.ArrayList;
 
 public class Order {
     private ArrayList<Dish> order;
+
+    //add a static variable to uniquely identify orders, the fact that is static makes it common to all order objects
+    private static int lastId = 0;
+    private int id = 0;
+
+
     public Order(){
         this.order = new ArrayList<>();
+        this.id = ++lastId;
     }
     public ArrayList<Dish> getOrder() {
         return order;
@@ -26,4 +33,9 @@ public class Order {
     public void setOrder(ArrayList<Dish> order){
         this.order = order;
     }
+
+    public int getId() {
+        return id;
+    }
+
 }
