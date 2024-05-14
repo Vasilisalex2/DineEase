@@ -1,4 +1,6 @@
 package business;
+import business.ordering.Menu;
+import business.ordering.Order;
 
 /**
  * brief description of the class.
@@ -11,5 +13,21 @@ package business;
  */
 
 public class Business {
-  
+    private int id;
+    private Menu menu;
+    private TaskList taskList;
+  public Business(int id){
+      this.menu = new Menu();
+      this.id = id;
+      this.taskList = new TaskList();
+  }
+  public int getID(){
+      return id;
+  }
+  public Menu getMenu(){
+      return this.menu;
+  }
+  public void addToTaskList(Order task){
+      taskList.addTask(task);
+  }
 }

@@ -1,5 +1,7 @@
 package business.ordering;
 
+import java.util.ArrayList;
+
 /**
  * brief description of the class.
  *
@@ -11,5 +13,17 @@ package business.ordering;
  */
 
 public class Order {
-  
+    private ArrayList<Dish> order;
+    public Order(){
+        this.order = new ArrayList<>();
+    }
+    public ArrayList<Dish> getOrder() {
+        return order;
+    }
+    public void addToOrder(Dish dish){
+        this.order.add(dish);
+    }
+    public void setOrder(ArrayList<Dish> order){
+        this.order = order;
+    }
 }

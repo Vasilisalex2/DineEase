@@ -1,4 +1,6 @@
 package business.ordering;
+//import business.ordering.Dish;
+import java.util.ArrayList;
 
 /**
  * brief description of the class.
@@ -11,5 +13,24 @@ package business.ordering;
  */
 
 public class Menu {
-  
+    private ArrayList<Dish> menu;
+    private int id;
+    public Menu(){
+        this.menu = new ArrayList<>();
+        Dish test1 = new Dish();
+        Dish test2 = new Dish();
+        menu.add(test1);
+        menu.add(test2);
+
+    }
+
+    public ArrayList<Dish> getMenu(){
+        return this.menu;
+    }
+    public void addToMenu(Dish dish){
+        this.menu.add(dish);
+    }
+
+
 }
+

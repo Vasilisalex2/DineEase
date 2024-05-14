@@ -11,5 +11,12 @@ package users;
  */
 
 public class Customer extends Person {
-  
+    private boolean checkedIN;
+    public Customer(){
+        super();
+        this.checkedIN = false;
+    }
+    public boolean isCheckedIN(){
+        return this.checkedIN;
+    }
 }
