@@ -16,10 +16,10 @@ import java.util.Map;
 
 public class OrderStatistics {
 
-    public Map<Integer,Integer> calculateOrderTimes(OrderHistory orderHistory) {
+    public Map<Integer,Long> calculateOrderTimes(OrderHistory orderHistory) {
         Map times = new HashMap();
         for (Order order : orderHistory.getOrders()) {
-            times.put(order.getId(),order.getTime()); //TODO add time attributes to order class
+            times.put(order.getId(),order.getOrderTotalTime());
         }
         return times;
     }

@@ -11,5 +11,11 @@ package business;
  */
 
 public class Table {
-  
+    private int tableId;
+    private String status; //reserved or free
+
+    public Table(int tableId, String status) {
+        this.tableId = tableId;
+        this.status = status;
+    }
 }

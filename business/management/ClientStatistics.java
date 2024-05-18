@@ -1,14 +1,13 @@
 package business.management;
 
 /**
- * brief description of the class.
+ * This class calculates statistics based on the data of check ins-outs. Business owner can see peak hours and
+ * average stay time of customers
  *
- * (if necessary)
- * detailed description of the class purpose, functionality, usage
- *
- * @author NAME
+ * @author NIKOS
  * @version 1.0
  */
 
 public class ClientStatistics {
+    //TODO ask thodorh how he handles check in
 }

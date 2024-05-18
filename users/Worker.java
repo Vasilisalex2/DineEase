@@ -1,15 +1,20 @@
 package users;
 
+import business.management.CheckInOutEvent;
+
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
- * brief description of the class.
- *
- * (if necessary)
- * detailed description of the class purpose, functionality, usage
- *
+ * worker class extends the class and has additional fields and methods for persons who work at the business
  * @author NAME
  * @version 1.0
  */
 
 public class Worker extends Person {
-  
+    private ArrayList<CheckInOutEvent> workerTimeLog;
+
+    public ArrayList<CheckInOutEvent> getWorkerTimeLog() {
+        return workerTimeLog;
+    }
 }
