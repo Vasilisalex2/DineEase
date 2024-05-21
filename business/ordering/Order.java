@@ -1,5 +1,7 @@
 package business.ordering;
 
+import business.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -12,7 +14,7 @@ import java.util.ArrayList;
  * @version 1.0
  */
 
-public class Order {
+public class Order extends Task {
     private ArrayList<Dish> order;
 
     //add a static variable to uniquely identify orders, the fact that is static makes it common to all order objects
@@ -30,7 +32,7 @@ public class Order {
     public void addToOrder(Dish dish){
         this.order.add(dish);
     }
-    public void setOrder(ArrayList<Dish> order){
+    public void createOrder(ArrayList<Dish> order){
         this.order = order;
     }
 

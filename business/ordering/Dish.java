@@ -12,13 +12,18 @@ package business.ordering;
 
 public class Dish implements Cloneable{
   private int id;
+  private String name;
   private int quantity;
-  public Dish(){
+  public Dish(String name){
+    this.name = name;
     this.id = 0;
     this.quantity = 0;
   }
   public int getId(){
     return this.id;
+  }
+  public String getName(){
+    return name;
   }
   public int getQuantity(){
     return this.quantity;

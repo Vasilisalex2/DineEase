@@ -14,17 +14,17 @@ import java.util.ArrayList;
  */
 
 public class TaskList {
-    private ArrayList<Order> tasks;
+    private ArrayList<Task> tasks;
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
-    public ArrayList<Order> getTasks() {
+    public ArrayList<Task> getTasks() {
         return tasks;
     }
-    public void setTasks(ArrayList<Order> tasks) {
+    public void setTasks(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
-    public void addTask(Order task) {
+    public void addTask(Task task) {
         this.tasks.add(task);
     }
   

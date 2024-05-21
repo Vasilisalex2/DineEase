@@ -1,4 +1,5 @@
 package business;
+import business.ordering.Dish;
 import business.ordering.Menu;
 import business.ordering.Order;
 
@@ -20,6 +21,12 @@ public class Business {
       this.menu = new Menu();
       this.id = id;
       this.taskList = new TaskList();
+      for(int i =0; i<100; ++i){
+          menu.addToMenu(new Dish("Ok" + i));
+      }
+      menu.addToMenu(new Dish("A"));
+      menu.addToMenu(new Dish("B"));
+      menu.addToMenu(new Dish("C"));
   }
   public int getID(){
       return id;
