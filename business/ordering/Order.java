@@ -3,6 +3,7 @@ package business.ordering;
 import business.Task;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * brief description of the class.
@@ -16,6 +17,9 @@ import java.util.ArrayList;
 
 public class Order extends Task {
     private ArrayList<Dish> order;
+    //fields for statistics
+    private Date orderCreate; //TODO add times on order create and finish
+    private Date orderFinish;
 
     //add a static variable to uniquely identify orders, the fact that is static makes it common to all order objects
     private static int lastId = 0;
@@ -36,8 +40,15 @@ public class Order extends Task {
         this.order = order;
     }
 
+    //used in order statistics table
+    public long getOrderTotalTime() {
+        long totalTime = orderFinish.getTime() - orderCreate.getTime();
+        return totalTime;
+    }
+
     public int getId() {
         return id;
     }
+
 
 }

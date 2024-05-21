@@ -14,7 +14,6 @@ public class Transaction {
     private double amount;
 
     public Transaction(String transactionType, double amount) {
-
         this.transactionType = transactionType;
         this.amount = amount;
     }

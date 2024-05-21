@@ -1,14 +1,33 @@
 package business.management;
 
+import business.Business;
+import users.Worker;
+
+import java.util.ArrayList;
+
 /**
- * brief description of the class.
+ * class to fetch check in and out events and has functionality to fined late workers or worker that have worked over
+ * their shift
  *
- * (if necessary)
- * detailed description of the class purpose, functionality, usage
- *
- * @author NAME
+ * @author NIKOS
  * @version 1.0
  */
 
 public class WorkerStatistics {
+
+    private ArrayList<Worker> workers;
+
+    public WorkerStatistics(ArrayList<Worker> workers) {
+        this.workers = workers;
+    }
+
+    public void fetchEvents() {
+        for (Worker worker : workers) {
+            // do i need this for each or should i just parse the objects
+            for (CheckInOutEvent checkInOutEvent : worker.getWorkerTimeLog()) {
+
+            }
+
+        }
+    }
 }
