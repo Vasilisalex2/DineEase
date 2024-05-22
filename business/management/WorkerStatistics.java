@@ -4,6 +4,7 @@ import business.Business;
 import users.Worker;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * class to fetch check in and out events and has functionality to fined late workers or worker that have worked over
@@ -25,7 +26,8 @@ public class WorkerStatistics {
         for (Worker worker : workers) {
             // do i need this for each or should i just parse the objects
             for (CheckInOutEvent checkInOutEvent : worker.getWorkerTimeLog()) {
-
+                Date date = checkInOutEvent.getDate();
+                String type = checkInOutEvent.getType();
             }
 
         }

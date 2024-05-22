@@ -14,6 +14,7 @@ import java.util.Date;
 public class Worker extends Person {
     private ArrayList<CheckInOutEvent> workerTimeLog;
 
+
     public ArrayList<CheckInOutEvent> getWorkerTimeLog() {
         return workerTimeLog;
     }

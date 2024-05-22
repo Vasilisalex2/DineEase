@@ -14,16 +14,29 @@ import java.lang.reflect.Array;
 
 public class Person{
     private int id;
+    String fullName; //add field
     private Basket basket;
+
     public Person(){
         this.id = 0;
+
         this.basket = new Basket();
     }
+
+//    public Person(int id, String fullName, Basket basket) {
+//        this.id = id;
+//        this.fullName = fullName;
+//        this.basket = basket;
+//    }
 
     public int getID() {
         return id;
     }
     public Basket getBasket() {
         return basket;
+    }
+
+    public String getFullName() {
+        return fullName;
     }
 }

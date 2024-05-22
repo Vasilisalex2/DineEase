@@ -1,13 +1,19 @@
-package ui.owner;
+package ui.owner;[]
+
+import business.Business;
+import business.management.CheckInOutEvent;
+import users.Worker;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class OwnerMainScreen {
     private JTabbedPane tabbedPane1;
     private JTabbedPane tabbedPane2;
     private JTabbedPane tabbedPane3;
-    private JTable table1;
+    private JTable checkInOutWorkerStats;
     private JTable table2;
     private JPanel mainPanel;
     private JTabbedPane tabbedPane4;
@@ -19,7 +25,7 @@ public class OwnerMainScreen {
     private JTable table7;
     private JTable table8;
     private JTabbedPane tabbedPane6;
-    private JTable table9;
+    private JTable transactionsTable;
     private JTable table10;
     private JTabbedPane tabbedPane7;
     private JComboBox comboBox1;
@@ -28,12 +34,28 @@ public class OwnerMainScreen {
     private JComboBox comboBox4;
     private JButton button1;
 
+    Business business;
 
-    public void populatetable1() { //how to populate 2nd column with jbuttons for each worker to add task
-        table1 = new JTable();
 
-//        table1.set
-//        table1.addColumn();
+    public void populateCheckInOutWorkerStatsTable() { //how to populate 2nd column with jbuttons for each worker to add task
+        checkInOutWorkerStats = new JTable();
+
+        ArrayList<Worker> workers = business.getWorkers();
+         for (Worker worker : workers) {
+             ArrayList<String> fullName = new ArrayList<>();
+             ArrayList<String> type = new ArrayList<>();
+             ArrayList<Date> date = new ArrayList<>();
+
+             fullName.add(worker.getFullName());
+
+             for (CheckInOutEvent checkInOutEvent : worker.getWorkerTimeLog()) {
+                type.add(checkInOutEvent.getType());
+                date.add(checkInOutEvent.getDate());
+             }
+         }
+        checkInOutWorkerStats = new JTable(fullname?????????);
+
+
     }
 
     public static void main(String[] args) {
@@ -118,8 +140,8 @@ public class OwnerMainScreen {
         final JPanel panel7 = new JPanel();
         panel7.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         tabbedPane6.addTab("Transactions", panel7);
-        table9 = new JTable();
-        panel7.add(table9, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        transactionsTable = new JTable();
+        panel7.add(transactionsTable, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
         final JPanel panel8 = new JPanel();
         panel8.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         tabbedPane6.addTab("Worker Pay", panel8);
@@ -138,8 +160,8 @@ public class OwnerMainScreen {
         final JPanel panel11 = new JPanel();
         panel11.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         tabbedPane3.addTab("Check In/Out Log", panel11);
-        table1 = new JTable();
-        panel11.add(table1, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        checkInOutWorkerStats = new JTable();
+        panel11.add(checkInOutWorkerStats, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
         final JPanel panel12 = new JPanel();
         panel12.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         tabbedPane3.addTab("Late/Overtime", panel12);
