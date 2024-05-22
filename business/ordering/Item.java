@@ -11,5 +11,34 @@ package business.ordering;
  */
 
 public class Item {
-  
+    private int quantity;
+    private int lowerLimit;
+    private int higherLimit;
+    private String name;
+    public Item(){
+        this.quantity = 0;
+        this.name = "";
+
+    }
+    public void setQuantity(int newQuantity){
+        this.quantity = newQuantity;
+    }
+    public void setLowerLimit(int newQuantity){
+        this.lowerLimit = newQuantity;
+    }
+    public void setHigherLimit(int newQuantity){
+        this.higherLimit = newQuantity;
+    }
+    public int getQuantity(){
+        return this.quantity;
+    }
+    public int getLowerLimit(){
+        return this.lowerLimit;
+    }
+    public int getHigherLimit(){
+        return this.higherLimit;
+    }
+    public String getName(){
+        return this.name;
+    }
 }

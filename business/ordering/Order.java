@@ -1,5 +1,7 @@
 package business.ordering;
 
+import business.Task;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -13,7 +15,7 @@ import java.util.Date;
  * @version 1.0
  */
 
-public class Order {
+public class Order extends Task {
     private ArrayList<Dish> order;
     //fields for statistics
     private Date orderCreate; //TODO add times on order create and finish
@@ -34,7 +36,7 @@ public class Order {
     public void addToOrder(Dish dish){
         this.order.add(dish);
     }
-    public void setOrder(ArrayList<Dish> order){
+    public void createOrder(ArrayList<Dish> order){
         this.order = order;
     }
 

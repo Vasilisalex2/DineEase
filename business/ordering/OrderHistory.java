@@ -11,8 +11,13 @@ import java.util.ArrayList;
 
 public class OrderHistory {
     private ArrayList<Order> orders;
-
+    public OrderHistory() {
+        this.orders = new ArrayList<Order>();
+    }
     public ArrayList<Order> getOrders() {
         return orders;
+    }
+    public void addOrder(Order order) {
+        orders.add(order);
     }
 }

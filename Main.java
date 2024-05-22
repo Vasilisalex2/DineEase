@@ -53,7 +53,7 @@ public class Main {
                 user.getBasket().removeFromBasket(uDish);
                 //Order
                 Order order = new Order();
-                order.setOrder(user.getBasket().getBasket());
+                order.createOrder(user.getBasket().getBasket());
                 cBusiness.addToTaskList(order);
                 if(user.isCheckedIN()){
 

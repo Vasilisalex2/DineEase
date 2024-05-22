@@ -17,8 +17,8 @@ public class Menu {
     private int id;
     public Menu(){
         this.menu = new ArrayList<>();
-        Dish test1 = new Dish();
-        Dish test2 = new Dish();
+        Dish test1 = new Dish("");
+        Dish test2 = new Dish("");
         menu.add(test1);
         menu.add(test2);
 

@@ -10,6 +10,17 @@ package business;
  * @version 1.0
  */
 
-public class GeneralTask {
-  
+public class GeneralTask extends Task {
+    private taskType type;
+    public enum taskType{
+        tableCall
+    }
+    public GeneralTask(){
+        super();
+
+    }
+
+    public void setType(taskType type) {
+        this.type = type;
+    }
 }
