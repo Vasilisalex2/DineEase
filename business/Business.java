@@ -1,4 +1,5 @@
 package business;
+import business.management.Storage;
 import business.ordering.Menu;
 import business.ordering.Order;
 import business.ordering.Dish;
@@ -22,8 +23,10 @@ public class Business {
     private TaskList taskList; //TODO why would the business have a tasklist? each worker has a separate tasklist
     private ArrayList<Subscription> subscriptionList;
     private Timetable timetable;
+    private Storage storage;
 
     public Business(int id){
+        this.storage = new Storage();
         this.menu = new Menu();
         this.id = id;
         this.taskList = new TaskList();
@@ -42,5 +45,8 @@ public class Business {
     }
     public void addToTaskList(Order task){
         taskList.addTask(task);
+    }
+    public Storage getStorage(){
+        return storage;
     }
 }

@@ -14,8 +14,10 @@ public class Item {
     private int quantity;
     private int lowerLimit;
     private int higherLimit;
+    private String name;
     public Item(){
         this.quantity = 0;
+        this.name = "";
 
     }
     public void setQuantity(int newQuantity){
@@ -32,5 +34,11 @@ public class Item {
     }
     public int getLowerLimit(){
         return this.lowerLimit;
+    }
+    public int getHigherLimit(){
+        return this.higherLimit;
+    }
+    public String getName(){
+        return this.name;
     }
 }
