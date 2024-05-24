@@ -4,9 +4,9 @@ import business.Business;
 import users.Owner;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class StorageHandlingOUI extends JFrame{
-    private JPanel panel;
     public StorageHandlingOUI(Owner user, Business business) {
         setTitle("Storage Handling");
         setSize(460, 680);
@@ -21,15 +21,31 @@ public class StorageHandlingOUI extends JFrame{
         menubar.add(storageMenuItem);
         menubar.add(lowStorageMenuItem);
 
+
+        JPanel topPanel = new JPanel();
+        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
+
+        JPanel bottomPanel = new JPanel(new BorderLayout());
+        add(bottomPanel, BorderLayout.SOUTH);
+        JScrollPane scrollPane = new JScrollPane(topPanel);
+        add(scrollPane, BorderLayout.CENTER);
+
+        JButton button = new JButton("Back");
+        button.addActionListener(e -> {
+            new DashboardUI(user, business);
+            dispose();
+        });
+        bottomPanel.add(button);
+
         storageMenuItem.addActionListener(e -> {
-            getContentPane().removeAll();
-            add(new StorageHandlingOUI1(user, business));
+            topPanel.removeAll();
+            topPanel.add(new StorageHandlingOUI1(user, business));
             revalidate();
             repaint();
         });
         lowStorageMenuItem.addActionListener(e -> {
-            getContentPane().removeAll();
-            add(new StorageHandlingOUI2(user, business));
+            topPanel.removeAll();
+            topPanel.add(new StorageHandlingOUI2(user, business));
             revalidate();
             repaint();
         });

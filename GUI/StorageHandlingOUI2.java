@@ -2,11 +2,17 @@ package GUI;
 
 import business.Business;
 import business.ordering.Item;
+import business.ordering.Order;
+import users.Basket;
+import users.Customer;
 import users.Owner;
+import users.Worker;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
@@ -27,6 +33,15 @@ public class StorageHandlingOUI2 extends JPanel {
         // Bottom panel with centered button
         JPanel bottomPanel = new JPanel(new BorderLayout());
         add(bottomPanel, BorderLayout.SOUTH);
+
+        JButton button = new JButton("Order");
+        //Button Order
+        button.addActionListener(e->{
+            //createSupplierOrder();
+            System.out.println("Print Supplier Order.");
+        });
+        // Bottom panel with centered button
+        bottomPanel.add(button, BorderLayout.CENTER);
 
         loadPanel(business);
 
@@ -49,7 +64,7 @@ public class StorageHandlingOUI2 extends JPanel {
 
         ArrayList<Item> storage = business.getStorage().getStorage();
         for (Item item : storage) {
-            if(item.getHigherLimit()>item.getQuantity()) {
+            if(item.getLowerLimit()>item.getQuantity()) {
                 tableModel.addRow(new Object[]{item.getName(), item.getQuantity()});
             }
         }

@@ -9,8 +9,6 @@ import users.Person;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class BasketUI extends JFrame{
@@ -28,9 +26,7 @@ public class BasketUI extends JFrame{
 
         JButton button = new JButton("Order");
         //Button Order
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        button.addActionListener(e->{
                 if(user.getClass() == Customer.class){
                     if(((Customer) user).isCheckedIN()){
                         Basket basket = user.getBasket();
@@ -50,7 +46,6 @@ public class BasketUI extends JFrame{
                         System.out.println("You are not checked IN");
                     }
                 }
-            }
         });
         // Bottom panel with centered button
         JPanel bottomPanel = new JPanel(new BorderLayout());
@@ -85,9 +80,7 @@ public class BasketUI extends JFrame{
             JButton butQuantity = new JButton("Change Quantity");
             JTextField inputField = new JTextField(2);
             inputField.setText(Integer.toString(dish.getQuantity()));
-            butQuantity.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
+            butQuantity.addActionListener(e->{
                     String text = inputField.getText();
                     if (text.matches("\\d+")) {
                         dish.setQuantity(Integer.parseInt(text));
@@ -99,7 +92,6 @@ public class BasketUI extends JFrame{
                     } else {
                         System.err.println("Invalid input: " + text);
                     }
-                }
             });
 
 

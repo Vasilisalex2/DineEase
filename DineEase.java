@@ -24,7 +24,7 @@ public class DineEase {
         businesses = new ArrayList<>();
         users = new ArrayList<>();
 
-        Business test = new Business(1);
+        Business test = new Business(10);
         businesses.add(test);
     }
     public void addBusiness(Business business){

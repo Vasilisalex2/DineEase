@@ -24,8 +24,8 @@ public class StorageHandlingOUI1 extends JPanel {
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
 
         // Bottom panel with centered button
-        JPanel bottomPanel = new JPanel(new BorderLayout());
-        add(bottomPanel, BorderLayout.SOUTH);
+        //JPanel bottomPanel = new JPanel(new BorderLayout());
+        //add(bottomPanel, BorderLayout.SOUTH);
 
         loadPanel(business);
 
@@ -111,7 +111,7 @@ public class StorageHandlingOUI1 extends JPanel {
         JPanel rightPanel = new JPanel();
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.X_AXIS));
 
-        Dimension buttonSize = new Dimension(100, 50);
+        Dimension buttonSize = new Dimension(70, 50);
         Dimension inputSize = new Dimension(70, 5);
         quantButton.setPreferredSize(buttonSize);
         lowerButton.setPreferredSize(buttonSize);

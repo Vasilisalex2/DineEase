@@ -16,8 +16,9 @@ public class Item {
     private int higherLimit;
     private String name;
     public Item(){
-        this.quantity = 0;
-        this.name = "";
+        this.quantity = 10;
+        this.lowerLimit = 20;
+        this.name = "FAFADSDASDA";
 
     }
     public void setQuantity(int newQuantity){
