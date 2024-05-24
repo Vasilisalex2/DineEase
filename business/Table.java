@@ -1,5 +1,7 @@
 package business;
 
+import users.Customer;
+
 /**
  * brief description of the class.
  *
@@ -12,10 +14,30 @@ package business;
 
 public class Table {
     private int tableId;
-    private String status; //reserved or free
+    //private String status; //reserved or free
+    private enum eStatus{
+        FREE,
+        RESERVED,
+        OCCUPIED
+    }
+    private eStatus status;
+    private Customer customer;
+    private static int lastTableID = 0;
 
-    public Table(int tableId, String status) {
-        this.tableId = tableId;
-        this.status = status;
+    public Table() {
+        this.tableId = lastTableID++;
+        this.status = eStatus.FREE;
+    }
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+    public void removeCustomer() {
+        this.customer = null;
+    }
+    public Customer getCustomer() {
+        return this.customer;
+    }
+    public int getTableId() {
+        return tableId;
     }
 }

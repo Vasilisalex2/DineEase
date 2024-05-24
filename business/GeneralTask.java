@@ -12,6 +12,7 @@ package business;
 
 public class GeneralTask extends Task {
     private taskType type;
+    private Table table;
     public enum taskType{
         tableCall
     }
@@ -22,5 +23,8 @@ public class GeneralTask extends Task {
 
     public void setType(taskType type) {
         this.type = type;
+    }
+    public void setTable(Table table) {
+        this.table = table;
     }
 }

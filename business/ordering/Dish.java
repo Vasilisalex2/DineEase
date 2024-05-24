@@ -1,5 +1,7 @@
 package business.ordering;
 
+import business.Table;
+
 /**
  * brief description of the class.
  *
@@ -14,6 +16,8 @@ public class Dish implements Cloneable{
   private int id;
   private String name;
   private int quantity;
+  private Table table;
+
   public Dish(String name){
     this.name = name;
     this.id = 0;
@@ -30,6 +34,12 @@ public class Dish implements Cloneable{
   }
   public void setQuantity(int id){
     this.quantity = id;
+  }
+  public void setTable(Table table){
+    this.table = table;
+  }
+  public Table getTable(){
+    return this.table;
   }
 
   @Override

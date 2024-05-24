@@ -26,14 +26,19 @@ public class Business {
     private ArrayList<Subscription> subscriptionList;
     private Timetable timetable;
     private Storage storage;
+    private ArrayList<Table> tables;
 
     public Business(int id){
         this.storage = new Storage();
         this.menu = new Menu();
         this.id = id;
         this.taskList = new TaskList();
+        this.tables = new ArrayList<Table>();
         for(int i =0; i<100; ++i){
             menu.addToMenu(new Dish("Ok" + i));
+        }
+        for(int i =0; i<10; ++i){
+            tables.add(new Table());
         }
         menu.addToMenu(new Dish("A"));
         menu.addToMenu(new Dish("B"));
@@ -55,5 +60,16 @@ public class Business {
 
     public Storage getStorage(){
         return storage;
+    }
+    public ArrayList<Table> getTables() {
+        return tables;
+    }
+    public Table getTable(int index){
+        for (Table t: tables){
+            if(t.getTableId() == index){
+                return t;
+            }
+        }
+        return null;
     }
 }

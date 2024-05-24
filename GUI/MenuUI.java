@@ -4,6 +4,7 @@ import business.Business;
 import business.GeneralTask;
 import business.ordering.Dish;
 import business.ordering.Menu;
+import users.Customer;
 import users.Person;
 
 import javax.swing.*;
@@ -33,10 +34,13 @@ public class MenuUI extends JFrame {
             frame.dispose();
         });
         butWaiter.addActionListener(e -> {
-            if(!butDisable){
-                GeneralTask callWaiter = new GeneralTask();
-                callWaiter.setType(GeneralTask.taskType.tableCall);
-                butDisable = true;
+            if(user instanceof Customer){
+                if(!butDisable && ((Customer) user).isCheckedIN()){
+                    GeneralTask callWaiter = new GeneralTask();
+                    callWaiter.setType(GeneralTask.taskType.tableCall);
+                    callWaiter.setTable(((Customer)user).getTable());
+                    butDisable = true;
+                }
             }
         });
         panel2.add(butBasket);

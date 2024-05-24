@@ -1,5 +1,6 @@
 package users;
 
+import business.Table;
 import business.ordering.Order;
 import business.ordering.OrderHistory;
 
@@ -16,6 +17,7 @@ import business.ordering.OrderHistory;
 public class Customer extends Person {
     private boolean checkedIN;
     private OrderHistory orders;
+    private Table table;
     public Customer(){
         super();
         this.orders = new OrderHistory();
@@ -29,5 +31,11 @@ public class Customer extends Person {
     }
     public OrderHistory getOrderHistory(){
         return this.orders;
+    }
+    public void setTable(Table table){
+        this.table = table;
+    }
+    public Table getTable(){
+        return this.table;
     }
 }
