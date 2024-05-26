@@ -1,5 +1,6 @@
 package business;
 import business.management.Storage;
+import business.ordering.Bill;
 import business.ordering.Menu;
 import business.ordering.Order;
 import business.ordering.Dish;
@@ -30,8 +31,16 @@ public class Business {
     private Storage storage;
     private ArrayList<Table> tables;
     private ArrayList<StoreRating> reviews;
+    private ArrayList<Reservation> reservations;
+    private ArrayList<Table> tables;
+    private ArrayList<Bill> bills;
+    private static ArrayList<Order> orders;
 
     public Business(int id){
+        this.reservations = new ArrayList<>();
+        this.tables = new ArrayList<>();
+        this.bills = new ArrayList<>();
+        this.orders = new ArrayList<>();
         this.reviews = new ArrayList<StoreRating>();
         this.storage = new Storage();
         this.name = "TEST";
@@ -92,4 +101,111 @@ public class Business {
     public void addReview(StoreRating review){
         reviews.add(review);
     }
+
+    public void addReservation(Reservation reservation) {
+        reservations.add(reservation);
+    }
+
+    public void addTable(Table table) {
+        tables.add(table);
+    }
+    public void addBill(Bill bill) {
+        bills.add(bill);
+    }
+    public ArrayList<Order> getOrders() {
+        return orders;
+    }
+    public void addOrder(Order order) {
+        orders.add(order);
+    }
+
+
+
+    public void printTables() {
+        System.out.println("Tables for " + name + ":");
+        for (Table table : tables) {
+            System.out.println(table);
+        }
+    }
+
+
+
+    // Accessor method for reservations
+    public ArrayList<Reservation> getReservations() {
+        return reservations;
+    }
+    public String isTableFree(int tableId, ArrayList<Table> tables) {
+        for (Table table : tables) {
+            if (table.getTableId() == tableId && table.getStatus().equals("Free")) {
+                return "Yes";
+            }
+        }
+        return "No";
+    }
+
+    public String showCheckInWithoutRes(int tableId, String customerName) {
+        // Check if the table exists in the business's tables list
+        for (Table table : tables) {
+            if (table.getTableId() == tableId) {
+                // If the table exists, occupy it
+                table.notFreeTable();
+                // Return the check-in details
+                return "Check-in details without reservation:\nTable ID: " + tableId + "\nCustomer Name: " + customerName;
+            }
+        }
+        // If the table doesn't exist, return a message
+        return "Table with ID " + tableId + " not found.";
+    }
+
+    public String showBusiness() {
+        String details = "Business Name: " + name + "\n";
+
+
+        return details;}
+    public boolean hasCustomer(int customerId) {
+        for (Reservation reservation : reservations) {
+            if (reservation.getCustomerId() == customerId) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int getTableIdByCustomerId(int customerId) {
+        for (Reservation reservation : reservations) {
+            if (reservation.getCustomerId() == customerId) {
+                return reservation.getTableId();
+            }
+        }
+        return -1;
+    }
+    public Order findOrderByTableId(int tableId) {
+        for (Order order : orders) {
+            if (order.getTableId() == tableId) {
+                return order;
+            }
+        }
+        return null; // Επιστρέφουμε null αν δεν βρεθεί παραγγελία με το συγκεκριμένο tableId
+    }
+    public Bill getBill(int tableId) {
+        for (Bill bill : bills) {
+            if (bill.getTableId() == tableId) {
+                return bill;
+            }
+        }
+        return null;
+    }
+    public void removeBill(Bill bill) {
+        bills.remove(bill);
+    }
+
+    public Table getTable(int tableId) {
+        for (Table table : tables) {
+            if (table.getTableId() == tableId) {
+                return table;
+            }
+        }
+        return null; // If no table with the given ID is found
+    }
 }
+

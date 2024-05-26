@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 
 public class DineEase {
-    private ArrayList<Business> businesses;
+    private static ArrayList<Business> businesses;
     private ArrayList<Person> users;
 
     public DineEase(){
@@ -35,10 +35,20 @@ public class DineEase {
         users.add(user);
     }
 
-    public ArrayList<Business> getBusinesses() {
+    public static ArrayList<Business> getBusinesses() {
         return businesses;
     }
     public ArrayList<Person> getUsers() {
         return users;
     }
+
+    public static Business findBusinessByName(String name) {
+        for (Business business : businesses) {
+            if (business.getName().equals(name)) {
+                return business;
+            }
+        }
+        return null; // If no business with the given name is found
+    }
+
 }
