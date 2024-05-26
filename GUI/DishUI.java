@@ -11,9 +11,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class DishUI extends JFrame {
-    public DishUI(Person user, Business business, Dish dish){
+    public DishUI(Person user, Business business, Dish dish,Point location){
         setTitle("Dish UI - " + dish.getName());
         setSize(460,680);
+        setLocation(location);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel desc = new JPanel();
@@ -43,7 +44,7 @@ public class DishUI extends JFrame {
 
             if (text.matches("\\d+")) {
                 user.getBasket().addToBasket(dish,Integer.parseInt(text));
-                new MenuUI(user,business, business.getMenu());
+                new MenuUI(user,business, business.getMenu(),this.getLocation());
                 dispose();
             } else {
                 System.err.println("Invalid input: " + text);

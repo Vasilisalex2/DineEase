@@ -10,9 +10,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class BusinessUI extends JFrame{
-    public BusinessUI(Customer user,Business business){
+    public BusinessUI(Customer user,Business business,Point location){
         setTitle(business.getName() + "UI");
         setSize(460,680);
+        setLocation(location);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         setLayout(new BorderLayout());
@@ -44,7 +45,7 @@ public class BusinessUI extends JFrame{
         menuButton.setForeground(Color.WHITE);
 
         menuButton.addActionListener(e -> {
-                new MenuUI(user,business, business.getMenu());
+                new MenuUI(user,business, business.getMenu(),this.getLocation());
                 dispose();
         });
 
@@ -58,7 +59,7 @@ public class BusinessUI extends JFrame{
         resButton.setForeground(Color.WHITE);
 
         resButton.addActionListener(e -> {
-            new ReservationUI(user,business);
+            new ReservationUI(user,business,this.getLocation());
             dispose();
         });
 

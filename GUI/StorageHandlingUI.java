@@ -16,10 +16,11 @@ import java.util.ArrayList;
 
 public class StorageHandlingUI extends JFrame {
     private JPanel topPanel;
-    public StorageHandlingUI(Person user, Business business) {
+    public StorageHandlingUI(Person user, Business business,Point location) {
         //new JFrame("StorageHandling");
         setTitle("Storage Handling");
         setSize(460,680);
+        setLocation(location);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         topPanel = new JPanel();
@@ -35,7 +36,7 @@ public class StorageHandlingUI extends JFrame {
         JButton button = new JButton("Back");
         //Button Order
         button.addActionListener(e -> {
-            new DashboardUI(user, business);
+            new DashboardUI(user, business,this.getLocation());
             dispose();
         });
 

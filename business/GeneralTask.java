@@ -15,11 +15,15 @@ public class GeneralTask extends Task {
     private Table table;
     private String description;
     public enum taskType{
-        tableCall
+        tableCall,
+        random
     }
-    public GeneralTask(){
-        super();
-
+    public GeneralTask(String description, taskType type){
+        this.description = description;
+        this.type = type;
+        if(type == taskType.tableCall){
+            description = description + " from table : " + Integer.toString(table.getTableId());
+        }
     }
 
     public void setType(taskType type) {

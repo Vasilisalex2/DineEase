@@ -40,7 +40,7 @@ public class BasketUI extends JFrame{
                         basket.clearBasket();
                         business.addToTaskList(order);
                         ((Customer) user).getOrderHistory().addOrder(order);
-                        new BusinessUI((Customer)user, business);
+                        new BusinessUI((Customer)user, business,this.getLocation());
                         dispose();
                     }
                     else{
@@ -58,7 +58,7 @@ public class BasketUI extends JFrame{
                     basket.clearBasket();
                     business.addToTaskList(order);
                     //((Customer) user).getOrderHistory().addOrder(order);
-                    new DashboardUI(user, business);
+                    new DashboardUI(user, business,this.getLocation());
                     dispose();
                 }
         });

@@ -11,9 +11,10 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class ReservationUI extends JFrame {
-    public ReservationUI(Person user, Business business) {
+    public ReservationUI(Person user, Business business,Point location) {
         setTitle("Reservation UI");
         setSize(460, 680);
+        setLocation(location);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel topPanel = new JPanel();
@@ -31,9 +32,9 @@ public class ReservationUI extends JFrame {
         button.setPreferredSize(new Dimension(100, 30));
         button.addActionListener(e -> {
             if (user instanceof Customer) {
-                new BusinessUI((Customer) user, business);
+                new BusinessUI((Customer) user, business,this.getLocation());
             } else {
-                new DashboardUI(user, business);
+                new DashboardUI(user, business,this.getLocation());
             }
             dispose();
         });

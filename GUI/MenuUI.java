@@ -15,12 +15,13 @@ import java.util.ArrayList;
 public class MenuUI extends JFrame {
     //Menu menu{
     private boolean butDisable;
-    public MenuUI(Person user,Business business, Menu menu){
+    public MenuUI(Person user,Business business, Menu menu, Point location){
         butDisable = false;
 
-        JFrame frame = new JFrame("Menu");
-        frame.setSize(460,680);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Menu");
+        setSize(460,680);
+        setLocation(location);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //frame.setLayout(null);
         JPanel panel1 = new JPanel();
         panel1.setSize(300, 600);
@@ -31,13 +32,12 @@ public class MenuUI extends JFrame {
         JButton butWaiter = new JButton("Call Waiter");
         butBasket.addActionListener(e -> {
             new BasketUI(user,business);
-            frame.dispose();
+            dispose();
         });
         butWaiter.addActionListener(e -> {
             if(user instanceof Customer){
                 if(!butDisable && ((Customer) user).isCheckedIN()){
-                    GeneralTask callWaiter = new GeneralTask();
-                    callWaiter.setType(GeneralTask.taskType.tableCall);
+                    GeneralTask callWaiter = new GeneralTask("Table Call",GeneralTask.taskType.tableCall);
                     callWaiter.setTable(((Customer)user).getTable());
                     butDisable = true;
                 }
@@ -65,10 +65,10 @@ public class MenuUI extends JFrame {
         JScrollPane scrollPane = new JScrollPane(table);
         panel1.add(scrollPane, BorderLayout.CENTER);
 
-        frame.add(panel1,BorderLayout.NORTH);
-        frame.add(panel2, BorderLayout.SOUTH);
+        add(panel1,BorderLayout.NORTH);
+        add(panel2, BorderLayout.SOUTH);
 
-        frame.setVisible(true);
+        setVisible(true);
 
     }
 
@@ -106,7 +106,7 @@ class ButtonEditor extends DefaultCellEditor {
         button = new JButton();
         //button.setOpaque(true);
         button.addActionListener(e -> {
-            new DishUI(user,business,dish);
+            new DishUI(user,business,dish,new Point(0,0));
             fireEditingStopped();
             //frane.dispose();
         });

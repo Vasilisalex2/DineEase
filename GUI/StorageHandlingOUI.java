@@ -7,10 +7,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class StorageHandlingOUI extends JFrame{
-    public StorageHandlingOUI(Owner user, Business business) {
+    public StorageHandlingOUI(Owner user, Business business, Point location) {
         setTitle("Storage Handling");
         setSize(460, 680);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocation(location);
 
         JMenuBar menubar = new JMenuBar();
         setJMenuBar(menubar);
@@ -33,7 +34,7 @@ public class StorageHandlingOUI extends JFrame{
 
         JButton button = new JButton("Back");
         button.addActionListener(e -> {
-            new DashboardUI(user, business);
+            new DashboardUI(user, business,this.getLocation());
             dispose();
         });
         button.setBackground(Color.BLUE);

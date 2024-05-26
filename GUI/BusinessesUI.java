@@ -10,8 +10,9 @@ import java.util.ArrayList;
 
 public class BusinessesUI extends JFrame {
     private JPanel topPanel;
-    public BusinessesUI(Customer user, DineEase dinease){
+    public BusinessesUI(Customer user, DineEase dinease, Point location){
         setSize(460, 680);
+        setLocation(location);
         setLayout(new BorderLayout());
 
 
@@ -45,7 +46,7 @@ public class BusinessesUI extends JFrame {
         button.setForeground(Color.WHITE);
 
         button.addActionListener(e->{
-            new BusinessUI(user,business);
+            new BusinessUI(user,business,this.getLocation());
             dispose();
         });
 

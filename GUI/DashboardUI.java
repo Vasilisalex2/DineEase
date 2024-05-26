@@ -6,9 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class DashboardUI extends JFrame {
-    public DashboardUI(Person user, Business business){
+    public DashboardUI(Person user, Business business,Point location){
         setTitle("Dashboard");
         setSize(460,680);
+        setLocation(location);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         //frame.setResizable(false);
@@ -24,24 +25,24 @@ public class DashboardUI extends JFrame {
 
         storageButton.addActionListener(e->{
                 if(user instanceof Owner){
-                    new StorageHandlingOUI((Owner)user , business);
+                    new StorageHandlingOUI((Owner)user , business,this.getLocation());
                     dispose();
                 }
                 else{
-                    new StorageHandlingUI((Worker)user,business);
+                    new StorageHandlingUI((Worker)user,business,this.getLocation());
                     dispose();
                 }
         });
         menuButton.addActionListener(e->{
-            new MenuUI(user,business,business.getMenu());
+            new MenuUI(user,business,business.getMenu(),this.getLocation());
             dispose();
         });
         resButton.addActionListener(e->{
-            new ReservationUI(user,business);
+            new ReservationUI(user,business,this.getLocation());
             dispose();
         });
         taskButton.addActionListener(e->{
-            new TasksUI((Worker)user,business);
+            new TasksUI((Worker)user,business,this.getLocation());
             dispose();
         });
 
