@@ -21,15 +21,21 @@ public class Table {
     private enum eStatus{
         FREE,
         RESERVED,
-        OCCUPIED
+        OCCUPIED;
+
+
     }
     private eStatus status;
     private Customer customer;
     private static int lastTableID = 0;
+    private int capacity;
+    private String occupiedBy ;
+
 
     public Table() {
         this.tableId = lastTableID++;
         this.status = eStatus.FREE;
+        this.occupiedBy = "";
     }
     public void setCustomer(Customer customer) {
         this.customer = customer;
@@ -48,5 +54,41 @@ public class Table {
     }
     public void addReservation(Reservation reservation) {
         this.reservations.add(reservation);
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+    public eStatus getStatus() {
+        return status;
+    }
+    public String occupiedBy() {
+        return occupiedBy;
+    }
+    public void reserveTable() {
+        if (status.equals("FREE")) {
+            status = eStatus.valueOf("Reserved");
+        }
+    }
+    public void freeTable() {
+        if (status.equals("RESERVED")) {
+            status = eStatus.valueOf("Free");
+            occupiedBy = "";
+        }
+    }
+    public void notFreeTable() {
+        if (status.equals("Free")) {
+            status = eStatus.valueOf("Occupied");
+            occupiedBy = "";
+        }
+    }
+    @Override
+    public String toString() {
+        return "Table{" +
+                "tableId=" + tableId +
+                ", capacity=" + capacity +
+                ", status='" + status + '\'' +
+                ", occupiedBy='" + occupiedBy + '\'' +
+                '}';
     }
 }

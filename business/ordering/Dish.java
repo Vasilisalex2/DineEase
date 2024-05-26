@@ -17,11 +17,13 @@ public class Dish implements Cloneable{
   private String name;
   private int quantity;
   private Table table;
+  private double price;
 
   public Dish(String name){
     this.name = name;
     this.id = 0;
     this.quantity = 0;
+    this.price = price;
   }
   public int getId(){
     return this.id;
@@ -50,6 +52,25 @@ public class Dish implements Cloneable{
       // This should never happen since MyClass implements Cloneable
       throw new InternalError(e);
     }
+  }
+
+
+  public double getPrice() {
+    return price;
+  }
+
+
+  public void setPrice(double price) {
+    this.price = price;
+  }
+  @Override
+  public String toString() {
+    return "Dish{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", quantity=" + quantity +
+            ", price=" + price +
+            '}';
   }
 }
 

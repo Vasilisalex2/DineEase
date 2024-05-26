@@ -1,3 +1,8 @@
+package business.ordering;
+
+import business.ordering.Dish;
+import business.ordering.Order;
+
 public class Bill {
     private Order order;
     private double totalPrice = 0;
