@@ -1,8 +1,11 @@
 package business;
+import business.management.ClientStatistics;
+import business.management.OrderStatistics;
 import business.management.Storage;
 import business.ordering.Menu;
 import business.ordering.Order;
 import business.ordering.Dish;
+import business.ordering.OrderHistory;
 import business.timetable.Timetable;
 import users.Worker;
 
@@ -27,6 +30,9 @@ public class Business {
     private Timetable timetable;
     private Storage storage;
     private ArrayList<Table> tables;
+    private ClientStatistics clientStatistics;
+    private OrderStatistics orderStatistics;
+    private OrderHistory orderHistory;
 
     public Business(int id){
         this.storage = new Storage();
@@ -71,5 +77,21 @@ public class Business {
             }
         }
         return null;
+    }
+
+    public ClientStatistics getClientStatistics() {
+        return clientStatistics;
+    }
+
+    public OrderHistory getOrderHistory() {
+        return orderHistory;
+    }
+
+    public OrderStatistics getOrderStatistics() {
+        return orderStatistics;
+    }
+
+    public void Test(){
+
     }
 }
