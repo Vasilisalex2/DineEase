@@ -11,12 +11,15 @@ import users.Worker;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BasketUI extends JFrame{
     private JPanel topPanel;
-    public BasketUI(Person user, Business business){
+    public BasketUI(Person user, Business business,Point location){
         setTitle("Basket");
         setSize(460, 680);
+        setLocation(location);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -25,9 +28,19 @@ public class BasketUI extends JFrame{
         topPanel = new JPanel();
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
 
-        JButton button = new JButton("Order");
+        JButton backButton = new JButton("Back");
+        backButton.setBackground(Color.BLUE);
+        backButton.setForeground(Color.WHITE);
+        backButton.addActionListener(e -> {
+            new MenuUI(user,business,business.getMenu(),this.getLocation());
+            dispose();
+        });
+
+        JButton orderButton = new JButton("Order");
+        orderButton.setBackground(Color.BLUE);
+        orderButton.setForeground(Color.WHITE);
         //Button Order
-        button.addActionListener(e->{
+        orderButton.addActionListener(e->{
                 if(user instanceof Customer){
                     if(((Customer) user).isCheckedIN()){
                         Basket basket = user.getBasket();
@@ -49,23 +62,44 @@ public class BasketUI extends JFrame{
                 }
                 else{
                     Basket basket = user.getBasket();
-                    Order order = new Order();
-                    //for (Dish dish : basket.getBasket()) {
-                    //   order.addToOrder(dish);
-                    //  basket.getBasket().remove(dish);
-                    //}
-                    order.createOrder(basket.getBasket());
+
+// Group dishes by table ID
+                    Map<Integer, ArrayList<Dish>> dishesByTable = new HashMap<>();
+
+                    for (Dish dish : basket.getBasket()) {
+                        int tableId = dish.getId();
+                        // Check if the table ID already exists in the map
+                        if (dishesByTable.containsKey(tableId)) {
+                            // If the table ID exists, add the dish to the existing list
+                            dishesByTable.get(tableId).add(dish);
+                        } else {
+                            // If the table ID doesn't exist, create a new list and add the dish
+                            ArrayList<Dish> dishesForTable = new ArrayList<>();
+                            dishesForTable.add(dish);
+                            dishesByTable.put(tableId, dishesForTable);
+                        }
+                    }
+
+// Create orders for each group of dishes with the same table ID
+                    for (Map.Entry<Integer, ArrayList<Dish>> entry : dishesByTable.entrySet()) {
+                        int tableId = entry.getKey();
+                        ArrayList<Dish> dishesForTable = entry.getValue();
+
+                        Order order = new Order();
+                        order.createOrder(dishesForTable);
+                        business.addToTaskList(order);
+                    }
+
                     basket.clearBasket();
-                    business.addToTaskList(order);
-                    //((Customer) user).getOrderHistory().addOrder(order);
+
                     new DashboardUI(user, business,this.getLocation());
                     dispose();
                 }
         });
         // Bottom panel with centered button
-        JPanel bottomPanel = new JPanel(new BorderLayout());
-
-        bottomPanel.add(button, BorderLayout.SOUTH);
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        bottomPanel.add(backButton);
+        bottomPanel.add(orderButton);
 
         add(topPanel, BorderLayout.NORTH);
         add(bottomPanel, BorderLayout.SOUTH);
@@ -82,6 +116,8 @@ public class BasketUI extends JFrame{
             JPanel dishPanel = new JPanel(new BorderLayout());
             JLabel dishName = new JLabel(dish.getName());
             JButton dishButton = new JButton("Remove Dish");
+            dishButton.setBackground(Color.BLUE);
+            dishButton.setForeground(Color.WHITE);
             dishButton.addActionListener(e -> {
                 basket.remove(dish);
                 topPanel.removeAll();
@@ -93,6 +129,8 @@ public class BasketUI extends JFrame{
 
 
             JButton butQuantity = new JButton("Change Quantity");
+            butQuantity.setBackground(Color.BLUE);
+            butQuantity.setForeground(Color.WHITE);
             JTextField inputField = new JTextField(2);
             inputField.setText(Integer.toString(dish.getQuantity()));
             butQuantity.addActionListener(e->{
@@ -115,6 +153,8 @@ public class BasketUI extends JFrame{
 
             if(user instanceof Worker){
                 JButton butTable = new JButton("Change Table");
+                butTable.setBackground(Color.BLUE);
+                butTable.setForeground(Color.WHITE);
                 JTextField inputTable = new JTextField(2);
                 inputTable.setText(Integer.toString(dish.getTable().getTableId()));
                 butTable.addActionListener(e->{

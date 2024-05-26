@@ -33,6 +33,8 @@ public class StorageHandlingOUI extends JFrame{
         add(scrollPane, BorderLayout.CENTER);
 
         JButton button = new JButton("Back");
+        button.setBackground(Color.BLUE);
+        button.setForeground(Color.WHITE);
         button.addActionListener(e -> {
             new DashboardUI(user, business,this.getLocation());
             dispose();

@@ -16,6 +16,7 @@ public class Dish implements Cloneable{
   private int id;
   private String name;
   private int quantity;
+  private String description;
   private Table table;
 
   public Dish(String name){
@@ -50,6 +51,12 @@ public class Dish implements Cloneable{
       // This should never happen since MyClass implements Cloneable
       throw new InternalError(e);
     }
+  }
+  public String getDescription(){
+    return this.description;
+  }
+  public void setDescription(String description){
+    this.description = description;
   }
 }
 

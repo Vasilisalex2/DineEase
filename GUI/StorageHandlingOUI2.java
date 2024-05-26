@@ -35,6 +35,8 @@ public class StorageHandlingOUI2 extends JPanel {
         add(bottomPanel, BorderLayout.SOUTH);
 
         JButton button = new JButton("Order");
+        button.setBackground(Color.BLUE);
+        button.setForeground(Color.WHITE);
         //Button Order
         button.addActionListener(e->{
             //createSupplierOrder();

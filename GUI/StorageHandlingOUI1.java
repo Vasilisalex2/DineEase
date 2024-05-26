@@ -23,10 +23,6 @@ public class StorageHandlingOUI1 extends JPanel {
         topPanel = new JPanel();
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
 
-        // Bottom panel with centered button
-        //JPanel bottomPanel = new JPanel(new BorderLayout());
-        //add(bottomPanel, BorderLayout.SOUTH);
-
         loadPanel(business);
 
         JScrollPane scrollPane = new JScrollPane(topPanel);
@@ -52,6 +48,8 @@ public class StorageHandlingOUI1 extends JPanel {
         JLabel itemName = new JLabel(item.getName());
 
         JButton removeButton = new JButton("Remove Item");
+        removeButton.setBackground(Color.BLUE);
+        removeButton.setForeground(Color.WHITE);
         removeButton.addActionListener(e -> {
             business.getStorage().removeItem(item);
             topPanel.removeAll();
@@ -65,6 +63,8 @@ public class StorageHandlingOUI1 extends JPanel {
         inputQuantity.setText(Integer.toString(item.getQuantity()));
 
         JButton quantButton = new JButton("Change Quantity");
+        quantButton.setBackground(Color.BLUE);
+        quantButton.setForeground(Color.WHITE);
         quantButton.addActionListener(e-> {
                 String text = inputQuantity.getText();
                 if (text.matches("\\d+")) {
@@ -80,6 +80,8 @@ public class StorageHandlingOUI1 extends JPanel {
         JTextField inputLower = new JTextField(2);
         inputLower.setText(Integer.toString(item.getLowerLimit()));
         JButton lowerButton = new JButton("Change Lower Limit");
+        lowerButton.setBackground(Color.BLUE);
+        lowerButton.setForeground(Color.WHITE);
         lowerButton.addActionListener(e-> {
             String text = inputLower.getText();
             if (text.matches("\\d+")) {
@@ -94,6 +96,8 @@ public class StorageHandlingOUI1 extends JPanel {
         JTextField inputHigher = new JTextField(2);
         inputHigher.setText(Integer.toString(item.getHigherLimit()));
         JButton higherButton = new JButton("Change Higher Limit");
+        higherButton.setBackground(Color.BLUE);
+        higherButton.setForeground(Color.WHITE);
         higherButton.addActionListener(e-> {
             String text = inputHigher.getText();
             if (text.matches("\\d+")) {
