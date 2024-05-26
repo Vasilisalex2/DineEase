@@ -40,7 +40,7 @@ public class BasketUI extends JFrame{
                         basket.clearBasket();
                         business.addToTaskList(order);
                         ((Customer) user).getOrderHistory().addOrder(order);
-                        new BusinessUI(user, business);
+                        new BusinessUI((Customer)user, business);
                         dispose();
                     }
                     else{

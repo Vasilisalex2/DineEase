@@ -25,7 +25,8 @@ public class StorageHandlingOUI extends JFrame{
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
 
-        JPanel bottomPanel = new JPanel(new BorderLayout());
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         add(bottomPanel, BorderLayout.SOUTH);
         JScrollPane scrollPane = new JScrollPane(topPanel);
         add(scrollPane, BorderLayout.CENTER);
@@ -35,6 +36,8 @@ public class StorageHandlingOUI extends JFrame{
             new DashboardUI(user, business);
             dispose();
         });
+        button.setBackground(Color.BLUE);
+        button.setForeground(Color.WHITE);
         bottomPanel.add(button);
 
         storageMenuItem.addActionListener(e -> {
