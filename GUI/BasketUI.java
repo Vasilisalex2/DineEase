@@ -114,7 +114,10 @@ public class BasketUI extends JFrame{
         ArrayList<Dish> basket = user.getBasket().getBasket();
         for (Dish dish : basket) {
             JPanel dishPanel = new JPanel(new BorderLayout());
-            JLabel dishName = new JLabel(dish.getName());
+            JTextField dishName = new JTextField(dish.getName());
+            dishName.setEditable(false);
+            dishName.setPreferredSize(new Dimension(150, 20));
+
             JButton dishButton = new JButton("Remove Dish");
             dishButton.setBackground(Color.BLUE);
             dishButton.setForeground(Color.WHITE);
@@ -147,7 +150,8 @@ public class BasketUI extends JFrame{
                     }
             });
 
-            dishPanel.add(dishName, BorderLayout.WEST);
+            JScrollPane jScrollPane = new JScrollPane(dishName);
+            dishPanel.add(jScrollPane, BorderLayout.NORTH);
             JPanel rightPanel = new JPanel();
             rightPanel.add(Box.createHorizontalGlue());
 
@@ -178,7 +182,7 @@ public class BasketUI extends JFrame{
             rightPanel.add(inputField);
             rightPanel.add(butQuantity);
             rightPanel.add(dishButton);
-            dishPanel.add(rightPanel, BorderLayout.EAST);
+            dishPanel.add(rightPanel, BorderLayout.SOUTH);
             topPanel.add(dishPanel);
         }
     }

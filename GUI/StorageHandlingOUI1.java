@@ -13,13 +13,11 @@ public class StorageHandlingOUI1 extends JPanel {
 
     public StorageHandlingOUI1(Owner user, Business business) {
 
-
         // show storage and have buttons for each item;
-        setSize(460, 680);
+        //setSize(460, 680);
         setLayout(new BorderLayout());
 
 
-        // Top panel for dish names and buttons
         topPanel = new JPanel();
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
 
@@ -66,15 +64,15 @@ public class StorageHandlingOUI1 extends JPanel {
         quantButton.setBackground(Color.BLUE);
         quantButton.setForeground(Color.WHITE);
         quantButton.addActionListener(e-> {
-                String text = inputQuantity.getText();
-                if (text.matches("\\d+")) {
-                    item.setQuantity(Integer.parseInt(text));
-                    topPanel.removeAll();
-                    loadPanel(business);
-                    System.out.println("Quantity updated");
-                } else {
-                    System.err.println("Invalid input: " + text);
-                }
+            String text = inputQuantity.getText();
+            if (text.matches("\\d+")) {
+                item.setQuantity(Integer.parseInt(text));
+                topPanel.removeAll();
+                loadPanel(business);
+                System.out.println("Quantity updated");
+            } else {
+                System.err.println("Invalid input: " + text);
+            }
         });
 
         JTextField inputLower = new JTextField(2);
@@ -115,25 +113,25 @@ public class StorageHandlingOUI1 extends JPanel {
         JPanel rightPanel = new JPanel();
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.X_AXIS));
 
-        Dimension buttonSize = new Dimension(70, 50);
-        Dimension inputSize = new Dimension(70, 5);
-        quantButton.setPreferredSize(buttonSize);
-        lowerButton.setPreferredSize(buttonSize);
-        higherButton.setPreferredSize(buttonSize);
-        removeButton.setPreferredSize(buttonSize);
+        //Dimension buttonSize = new Dimension(70, 50);
+        //Dimension inputSize = new Dimension(70, 5);
+        //quantButton.setPreferredSize(buttonSize);
+        //lowerButton.setPreferredSize(buttonSize);
+        //higherButton.setPreferredSize(buttonSize);
+        //removeButton.setPreferredSize(buttonSize);
 
-        quantButton.setFont(new Font(quantButton.getFont().getName(), Font.PLAIN, 9));
-        lowerButton.setFont(new Font(lowerButton.getFont().getName(), Font.PLAIN, 9));
-        higherButton.setFont(new Font(higherButton.getFont().getName(), Font.PLAIN, 9));
-        removeButton.setFont(new Font(removeButton.getFont().getName(), Font.PLAIN, 9));
+        //quantButton.setFont(new Font(quantButton.getFont().getName(), Font.PLAIN, 9));
+        //lowerButton.setFont(new Font(lowerButton.getFont().getName(), Font.PLAIN, 9));
+        //higherButton.setFont(new Font(higherButton.getFont().getName(), Font.PLAIN, 9));
+        //removeButton.setFont(new Font(removeButton.getFont().getName(), Font.PLAIN, 9));
 
-        inputQuantity.setPreferredSize(inputSize);
-        inputLower.setPreferredSize(inputSize);
-        inputHigher.setPreferredSize(inputSize);
+        //inputQuantity.setPreferredSize(inputSize);
+        //inputLower.setPreferredSize(inputSize);
+        //inputHigher.setPreferredSize(inputSize);
 
-        inputQuantity.setFont(new Font(inputQuantity.getFont().getName(), Font.PLAIN, 9));
-        inputLower.setFont(new Font(inputLower.getFont().getName(), Font.PLAIN, 9));
-        inputHigher.setFont(new Font(inputHigher.getFont().getName(), Font.PLAIN, 9));
+        //inputQuantity.setFont(new Font(inputQuantity.getFont().getName(), Font.PLAIN, 9));
+        //inputLower.setFont(new Font(inputLower.getFont().getName(), Font.PLAIN, 9));
+        //inputHigher.setFont(new Font(inputHigher.getFont().getName(), Font.PLAIN, 9));
 
 
         rightPanel.add(inputQuantity);
@@ -144,7 +142,9 @@ public class StorageHandlingOUI1 extends JPanel {
         rightPanel.add(higherButton);
         rightPanel.add(removeButton);
 
-        itemPanel.add(itemName, BorderLayout.WEST);
+        JScrollPane scrollPane = new JScrollPane(itemName);
+
+        itemPanel.add(scrollPane, BorderLayout.WEST);
         itemPanel.add(rightPanel, BorderLayout.EAST);
         return itemPanel;
     }

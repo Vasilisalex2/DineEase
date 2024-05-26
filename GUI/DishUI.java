@@ -27,11 +27,14 @@ public class DishUI extends JFrame {
 
         topPanel.add(contentPane);
 
+        Color LIGHT_BLUE = new Color(173, 216, 230);
+
         // Display dish description (non-editable)
         JTextArea descTextArea = new JTextArea(dish.getDescription());
         descTextArea.setEditable(false);
         descTextArea.setLineWrap(true);
         descTextArea.setWrapStyleWord(true);
+        descTextArea.setBackground(LIGHT_BLUE);
         JScrollPane descScrollPane = new JScrollPane(descTextArea);
         descScrollPane.setPreferredSize(new Dimension(0, 300));
         topPanel.add(descScrollPane);
@@ -55,8 +58,6 @@ public class DishUI extends JFrame {
         quantityPanel.add(quantityField);
         contentPane.add(quantityPanel);
 
-//////////////////////////////////////////////////////////
-        /////////////////////////////
         JButton backButton = new JButton("Back");
         backButton.setBackground(Color.BLUE);
         backButton.setForeground(Color.WHITE);

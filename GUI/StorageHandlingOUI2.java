@@ -22,7 +22,7 @@ public class StorageHandlingOUI2 extends JPanel {
     public StorageHandlingOUI2(Owner user, Business business) {
 
 
-        setSize(460, 680);
+        setSize(400, 680);
         setLayout(new BorderLayout());
 
 

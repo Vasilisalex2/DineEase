@@ -1,6 +1,7 @@
 package GUI;
 
 import business.Business;
+import jdk.jshell.SourceCodeAnalysis;
 import users.Customer;
 import users.Person;
 
@@ -52,9 +53,6 @@ public class BusinessUI extends JFrame{
         JButton resButton = new JButton("Reservation");
         resButton.setPreferredSize(new Dimension(150, 100));
         resButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        //resButton.setAlignmentY(Component.TOP_ALIGNMENT);
-        //menuButton.setBounds(160, 30, 100, 30);
-
         resButton.setBackground(Color.BLUE);
         resButton.setForeground(Color.WHITE);
 
@@ -63,10 +61,23 @@ public class BusinessUI extends JFrame{
             dispose();
         });
 
+        JButton sugButton = new JButton("Suggestions");
+        sugButton.setPreferredSize(new Dimension(150, 100));
+        sugButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        sugButton.setBackground(Color.BLUE);
+        sugButton.setForeground(Color.WHITE);
+
+        sugButton.addActionListener(e -> {
+            new SuggestionsUI(user,business,this.getLocation());
+            dispose();
+        });
+
         bottomPanel.add(Box.createVerticalStrut(60));
         bottomPanel.add(menuButton);
         bottomPanel.add(Box.createVerticalStrut(30));
         bottomPanel.add(resButton);
+        bottomPanel.add(Box.createVerticalStrut(30));
+        bottomPanel.add(sugButton);
 
         setVisible(true);
     }
