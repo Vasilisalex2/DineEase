@@ -1,7 +1,5 @@
-import business.Business;
-import business.ordering.Dish;
-import business.ordering.Menu;
-import users.Customer;
+package business;
+
 import users.Person;
 
 import java.util.ArrayList;
@@ -26,6 +24,9 @@ public class DineEase {
 
         Business test = new Business(10);
         businesses.add(test);
+        for(int i =0; i < 30; i++){
+            businesses.add(new Business(i));
+        }
     }
     public void addBusiness(Business business){
         businesses.add(business);

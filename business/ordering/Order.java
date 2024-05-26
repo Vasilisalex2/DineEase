@@ -28,6 +28,7 @@ public class Order extends Task {
 
 
     public Order(){
+        orderCreate = new Date();
         this.order = new ArrayList<>();
         this.id = ++lastId;
     }
@@ -38,7 +39,9 @@ public class Order extends Task {
         this.order.add(dish);
     }
     public void createOrder(ArrayList<Dish> order){
+
         this.order = order;
+        this.orderCreate = new Date();
     }
 
     //used in order statistics table
@@ -49,6 +52,16 @@ public class Order extends Task {
 
     public int getId() {
         return id;
+    }
+    public String getDescription(){
+        String temp = "";
+        for (Dish dish : this.order) {
+            temp = temp + dish.getName() + " quantity: "+dish.getQuantity() + "\n";
+        }
+        return temp;
+    }
+    public void setOrderFinish() {
+        this.orderFinish = new Date();
     }
 
 

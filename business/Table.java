@@ -2,6 +2,8 @@ package business;
 
 import users.Customer;
 
+import java.util.ArrayList;
+
 /**
  * brief description of the class.
  *
@@ -14,6 +16,7 @@ import users.Customer;
 
 public class Table {
     private int tableId;
+    private ArrayList<Reservation> reservations;
     //private String status; //reserved or free
     private enum eStatus{
         FREE,
@@ -39,5 +42,11 @@ public class Table {
     }
     public int getTableId() {
         return tableId;
+    }
+    public ArrayList<Reservation> getReservations() {
+        return reservations;
+    }
+    public void addReservation(Reservation reservation) {
+        this.reservations.add(reservation);
     }
 }

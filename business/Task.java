@@ -1,7 +1,5 @@
 package business;
 
-public class Task {
-    public Task(){
-
-    }
+public abstract class Task {
+    abstract public String getDescription();
 }

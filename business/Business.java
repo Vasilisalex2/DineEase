@@ -20,6 +20,8 @@ import java.util.ArrayList;
 
 public class Business {
     private int id;
+    private String name;
+    private String description;
     private ArrayList<Worker> workers;
     private Menu menu;
     private TaskList taskList; //TODO why would the business have a tasklist? each worker has a separate tasklist
@@ -27,9 +29,12 @@ public class Business {
     private Timetable timetable;
     private Storage storage;
     private ArrayList<Table> tables;
+    private ArrayList<StoreRating> reviews;
 
     public Business(int id){
+        this.reviews = new ArrayList<StoreRating>();
         this.storage = new Storage();
+        this.name = "TEST";
         this.menu = new Menu();
         this.id = id;
         this.taskList = new TaskList();
@@ -71,5 +76,20 @@ public class Business {
             }
         }
         return null;
+    }
+    public String getName(){
+        return name;
+    }
+    public String getDescription(){
+        return description;
+    }
+    public void setDescription(String description){
+        this.description = description;
+    }
+    public ArrayList<StoreRating> getReviews(){
+        return reviews;
+    }
+    public void addReview(StoreRating review){
+        reviews.add(review);
     }
 }
