@@ -55,13 +55,6 @@ public class Dish implements Cloneable{
     }
   }
 
-  public String getDescription(){
-    return this.description;
-  }
-  public void setDescription(String description){
-    this.description = description;
-
-
 
   public double getPrice() {
     return price;
@@ -79,6 +72,12 @@ public class Dish implements Cloneable{
             ", quantity=" + quantity +
             ", price=" + price +
             '}';
+  }
+  public String getDescription(){
+    return this.description;
+  }
+  public void setDescription(String description){
+    this.description = description;
   }
 }
 
