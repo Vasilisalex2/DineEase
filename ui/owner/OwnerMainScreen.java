@@ -1,5 +1,4 @@
-package ui.owner;[]
-
+package ui.owner;
 import business.Business;
 import business.management.CheckInOutEvent;
 import users.Worker;
@@ -41,19 +40,19 @@ public class OwnerMainScreen {
         checkInOutWorkerStats = new JTable();
 
         ArrayList<Worker> workers = business.getWorkers();
-         for (Worker worker : workers) {
-             ArrayList<String> fullName = new ArrayList<>();
-             ArrayList<String> type = new ArrayList<>();
-             ArrayList<Date> date = new ArrayList<>();
+        for (Worker worker : workers) {
+            ArrayList<String> fullName = new ArrayList<>();
+            ArrayList<String> type = new ArrayList<>();
+            ArrayList<Date> date = new ArrayList<>();
 
-             fullName.add(worker.getFullName());
+            fullName.add(worker.getFullName());
 
-             for (CheckInOutEvent checkInOutEvent : worker.getWorkerTimeLog()) {
+            for (CheckInOutEvent checkInOutEvent : worker.getWorkerTimeLog()) {
                 type.add(checkInOutEvent.getType());
                 date.add(checkInOutEvent.getDate());
-             }
-         }
-        checkInOutWorkerStats = new JTable(fullname?????????);
+            }
+        }
+        checkInOutWorkerStats = new JTable(fullname ? ????????);
 
 
     }
@@ -82,10 +81,17 @@ public class OwnerMainScreen {
      */
     private void $$$setupUI$$$() {
         mainPanel = new JPanel();
-        mainPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        mainPanel.setLayout(new GridBagLayout());
         final JPanel panel1 = new JPanel();
         panel1.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        mainPanel.add(panel1, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        GridBagConstraints gbc;
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+        mainPanel.add(panel1, gbc);
         tabbedPane1 = new JTabbedPane();
         tabbedPane1.setEnabled(true);
         panel1.add(tabbedPane1, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(200, 200), null, 0, false));

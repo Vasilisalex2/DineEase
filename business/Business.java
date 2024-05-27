@@ -5,6 +5,7 @@ import business.ordering.Menu;
 import business.ordering.Order;
 import business.ordering.Dish;
 import business.timetable.Timetable;
+import business.Table;
 import users.Worker;
 
 import java.util.ArrayList;
@@ -29,10 +30,9 @@ public class Business {
     private ArrayList<Subscription> subscriptionList;
     private Timetable timetable;
     private Storage storage;
-    private ArrayList<Table> tables;
+    private static ArrayList<Table> tables;
     private ArrayList<StoreRating> reviews;
     private ArrayList<Reservation> reservations;
-    private ArrayList<Table> tables;
     private ArrayList<Bill> bills;
     private static ArrayList<Order> orders;
 
@@ -136,7 +136,7 @@ public class Business {
     }
     public String isTableFree(int tableId, ArrayList<Table> tables) {
         for (Table table : tables) {
-            if (table.getTableId() == tableId && table.getStatus().equals("Free")) {
+            if (table.getTableId() == tableId && table.getStatus() == Table.eStatus.FREE) {
                 return "Yes";
             }
         }
@@ -199,13 +199,34 @@ public class Business {
         bills.remove(bill);
     }
 
-    public Table getTable(int tableId) {
+    public static Table getTable1(int tableId) {
         for (Table table : tables) {
             if (table.getTableId() == tableId) {
                 return table;
             }
         }
         return null; // If no table with the given ID is found
+    }
+    public boolean reservationCheck(int CustomerId) {
+
+        for (Reservation reservation : reservations) {
+            if (reservation.getCustomerId() == CustomerId) {
+                // Update table status to "Occupied" for the reservation's table ID
+                for (Table table : tables) {
+                    if (table.getTableId() == reservation.getTableId()) {
+                        table.notFreeTable(); // Update table status
+                        break;
+                    }
+                }
+
+                System.out.println("Reservation found for " + name + ":");
+                reservation.showCheckIn();
+
+            }
+        }
+        System.out.println("No reservation found for " + CustomerId);
+
+        return false;
     }
 }
 

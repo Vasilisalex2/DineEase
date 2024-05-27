@@ -18,7 +18,7 @@ public class Table {
     private int tableId;
     private ArrayList<Reservation> reservations;
     //private String status; //reserved or free
-    private enum eStatus{
+    public enum eStatus{
         FREE,
         RESERVED,
         OCCUPIED;
@@ -66,19 +66,21 @@ public class Table {
         return occupiedBy;
     }
     public void reserveTable() {
-        if (status.equals("FREE")) {
-            status = eStatus.valueOf("Reserved");
+        if (status == eStatus.FREE) {
+            status = eStatus.RESERVED;
         }
     }
+
     public void freeTable() {
-        if (status.equals("RESERVED")) {
-            status = eStatus.valueOf("Free");
+        if (status == eStatus.RESERVED || status == eStatus.OCCUPIED) {
+            status = eStatus.FREE;
             occupiedBy = "";
         }
     }
+
     public void notFreeTable() {
-        if (status.equals("Free")) {
-            status = eStatus.valueOf("Occupied");
+        if (status == eStatus.FREE || status == eStatus.RESERVED) {
+            status = eStatus.OCCUPIED;
             occupiedBy = "";
         }
     }

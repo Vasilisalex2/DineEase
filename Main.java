@@ -1,6 +1,7 @@
 import GUI.BusinessUI;
 import GUI.DashboardUI;
 import business.Business;
+import business.DineEase;
 import business.ordering.Item;
 import users.Cook;
 import users.Customer;
@@ -21,7 +22,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        int test = 0;
+        int test = 1;
         Scanner scanner = new Scanner(System.in);
         //Customer
         test = scanner.nextInt();
