@@ -1,9 +1,8 @@
 package business;
+import business.management.ClientStatistics;
+import business.management.OrderStatistics;
 import business.management.Storage;
-import business.ordering.Bill;
-import business.ordering.Menu;
-import business.ordering.Order;
-import business.ordering.Dish;
+import business.ordering.*;
 import business.timetable.Timetable;
 import business.Table;
 import users.Worker;
@@ -215,7 +214,7 @@ public class Business {
         bills.remove(bill);
     }
 
-    public static Table getTable1(int tableId) {
+    public  Table getTable1(int tableId) {
         for (Table table : tables) {
             if (table.getTableId() == tableId) {
                 return table;

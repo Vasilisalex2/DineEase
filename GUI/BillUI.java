@@ -8,6 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
+import static business.DineEase.findBusinessByName;
+
+
 public class BillUI extends JFrame {
     private JPanel BillUI;
     private JLabel Bill;
@@ -67,6 +70,7 @@ public class BillUI extends JFrame {
     }
 
     private void createWaiterTask(int tableId) {
+        Business Business = findBusinessByName("BusinessName1");
         Table table = Business.getTable1(tableId);
         String description = "Waiter in table " + tableId;
         Date currentTime = new Date(); // Current date and time
@@ -77,7 +81,7 @@ public class BillUI extends JFrame {
 
     private void removeBill(int tableId) {
 
-        business = DineEase.findBusinessByName(BusinessName);
+        business = findBusinessByName(BusinessName);
         business.ordering.Bill billToRemove = business.getBill(tableId);
         if (billToRemove != null) {
             business.removeBill(billToRemove);
