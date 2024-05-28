@@ -11,5 +11,8 @@ package users;
  */
 
 public class Cashier extends Worker {
-  
+
+    public Cashier(String fullName) {
+        super(fullName);
+    }
 }

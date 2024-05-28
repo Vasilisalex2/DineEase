@@ -15,6 +15,10 @@ public class Timetable {
     private ArrayList<Event> events;
     private ArrayList<Objection> objections;
 
+    public Timetable() {
+        this.events = new ArrayList<>();
+        this.objections = new ArrayList<>();
+    }
 
     public void createEvent(Event event) {
         events.add(event);

@@ -57,19 +57,43 @@ public class CheckInUI extends JFrame {
      */
     private void $$$setupUI$$$() {
         CheckInUI = new JPanel();
-        CheckInUI.setLayout(new com.jgoodies.forms.layout.FormLayout("fill:d:grow,left:4dlu:noGrow,fill:d:grow,left:4dlu:noGrow,fill:max(d;4px):noGrow", "center:max(d;4px):noGrow,top:4dlu:noGrow,center:max(d;4px):noGrow,top:4dlu:noGrow,center:d:grow,top:4dlu:noGrow,center:max(d;4px):noGrow"));
+        CheckInUI.setLayout(new GridBagLayout());
         final JLabel label1 = new JLabel();
         label1.setText("Check-In");
-        com.jgoodies.forms.layout.CellConstraints cc = new com.jgoodies.forms.layout.CellConstraints();
-        CheckInUI.add(label1, cc.xywh(1, 1, 3, 2));
+        GridBagConstraints gbc;
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 3;
+        gbc.gridheight = 2;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        CheckInUI.add(label1, gbc);
         textArea1 = new JTextArea();
-        CheckInUI.add(textArea1, cc.xyw(1, 5, 2, com.jgoodies.forms.layout.CellConstraints.FILL, com.jgoodies.forms.layout.CellConstraints.FILL));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+        CheckInUI.add(textArea1, gbc);
         cancelButton = new JButton();
         cancelButton.setText("Cancel");
-        CheckInUI.add(cancelButton, cc.xy(1, 7));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        CheckInUI.add(cancelButton, gbc);
         continueButton = new JButton();
         continueButton.setText("Continue");
-        CheckInUI.add(continueButton, cc.xy(3, 7));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        CheckInUI.add(continueButton, gbc);
     }
 
     /**

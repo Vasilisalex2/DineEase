@@ -21,7 +21,8 @@ public class Worker extends Person {
     public ArrayList<CheckInOutEvent> getWorkerTimeLog() {
         return workerTimeLog;
     }
-    public Worker (){
+    public Worker (String fullName){
+        super(fullName);
         this.taskList = new TaskList();
     }
     public TaskList getTaskList() {

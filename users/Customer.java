@@ -18,8 +18,8 @@ public class Customer extends Person {
     private boolean checkedIN;
     private OrderHistory orders;
     private Table table;
-    public Customer(){
-        super();
+    public Customer(String fullName){
+        super(fullName);
         this.orders = new OrderHistory();
         this.checkedIN = false;
     }

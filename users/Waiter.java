@@ -11,5 +11,8 @@ package users;
  */
 
 public class Waiter extends Worker {
-  
+
+    public Waiter(String fullName) {
+        super(fullName);
+    }
 }

@@ -2,6 +2,9 @@ package business.timetable;
 
 import users.Worker;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 /**
  * This class has the attributes of an Event object in the Timetable class
  *
@@ -14,11 +17,11 @@ public class Event {
     private String title;
     private String description;
     private String place;
-    private String date;
-    private String time;
-    private String duration;
+    private LocalDate date;
+    private LocalTime time;
+    private int duration;
 
-    public Event(Worker worker, String title, String description, String place, String date, String time, String duration) {
+    public Event(Worker worker, String title, String description, String place, LocalDate date, LocalTime time, int duration) {
         this.worker = worker;
         this.title = title;
         this.description = description;

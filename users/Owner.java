@@ -11,5 +11,9 @@ package users;
  */
 
 public class Owner extends Person {
+
+    public Owner(String fullName) {
+        super(fullName);
+    }
   
 }

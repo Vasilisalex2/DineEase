@@ -13,21 +13,23 @@ import java.lang.reflect.Array;
  */
 
 public class Person{
-    private int id;
-    String fullName; //add field
+    private int id = 0;
+    String fullName;
     private Basket basket;
 
+    private static int lastId = 0;
+
+    //TODO do we need this constructor? add basket with setter after the object creation?
     public Person(){
         this.id = 0;
 
         this.basket = new Basket();
     }
 
-//    public Person(int id, String fullName, Basket basket) {
-//        this.id = id;
-//        this.fullName = fullName;
-//        this.basket = basket;
-//    }
+    public Person(String fullName) {
+        this.id = ++lastId;
+        this.fullName = fullName;
+    }
 
     public int getID() {
         return id;
@@ -41,5 +43,9 @@ public class Person{
     }
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public void setBasket(Basket basket) {
+        this.basket = basket;
     }
 }
