@@ -1,6 +1,7 @@
 package GUI;
 
 import business.Business;
+import jdk.jshell.SourceCodeAnalysis;
 import users.Customer;
 import users.Person;
 
@@ -10,9 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class BusinessUI extends JFrame{
-    public BusinessUI(Customer user,Business business){
+    public BusinessUI(Customer user,Business business,Point location){
         setTitle(business.getName() + "UI");
         setSize(460,680);
+        setLocation(location);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         setLayout(new BorderLayout());
@@ -44,21 +46,29 @@ public class BusinessUI extends JFrame{
         menuButton.setForeground(Color.WHITE);
 
         menuButton.addActionListener(e -> {
-                new MenuUI(user,business, business.getMenu());
+                new MenuUI(user,business, business.getMenu(),this.getLocation());
                 dispose();
         });
 
         JButton resButton = new JButton("Reservation");
         resButton.setPreferredSize(new Dimension(150, 100));
         resButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        //resButton.setAlignmentY(Component.TOP_ALIGNMENT);
-        //menuButton.setBounds(160, 30, 100, 30);
-
         resButton.setBackground(Color.BLUE);
         resButton.setForeground(Color.WHITE);
 
         resButton.addActionListener(e -> {
-            new ReservationUI(user,business);
+            new ReservationUI(user,business,this.getLocation());
+            dispose();
+        });
+
+        JButton sugButton = new JButton("Suggestions");
+        sugButton.setPreferredSize(new Dimension(150, 100));
+        sugButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        sugButton.setBackground(Color.BLUE);
+        sugButton.setForeground(Color.WHITE);
+
+        sugButton.addActionListener(e -> {
+            new SuggestionsUI(user,business,this.getLocation());
             dispose();
         });
 
@@ -66,6 +76,8 @@ public class BusinessUI extends JFrame{
         bottomPanel.add(menuButton);
         bottomPanel.add(Box.createVerticalStrut(30));
         bottomPanel.add(resButton);
+        bottomPanel.add(Box.createVerticalStrut(30));
+        bottomPanel.add(sugButton);
 
         setVisible(true);
     }

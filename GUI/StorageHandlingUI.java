@@ -16,10 +16,11 @@ import java.util.ArrayList;
 
 public class StorageHandlingUI extends JFrame {
     private JPanel topPanel;
-    public StorageHandlingUI(Person user, Business business) {
+    public StorageHandlingUI(Person user, Business business,Point location) {
         //new JFrame("StorageHandling");
         setTitle("Storage Handling");
         setSize(460,680);
+        setLocation(location);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         topPanel = new JPanel();
@@ -29,17 +30,20 @@ public class StorageHandlingUI extends JFrame {
         JScrollPane scrollPane = new JScrollPane(topPanel);
         add(scrollPane, BorderLayout.CENTER);
 
-        JPanel bottomPanel = new JPanel(new BorderLayout());
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         add(bottomPanel, BorderLayout.SOUTH);
 
         JButton button = new JButton("Back");
+        button.setBackground(Color.BLUE);
+        button.setForeground(Color.WHITE);
+
         //Button Order
         button.addActionListener(e -> {
-            new DashboardUI(user, business);
+            new DashboardUI(user, business,this.getLocation());
             dispose();
         });
 
-        bottomPanel.add(button, BorderLayout.SOUTH);
+        bottomPanel.add(button);
 
 
 
@@ -71,6 +75,8 @@ public class StorageHandlingUI extends JFrame {
         inputQuantity.setText(Integer.toString(item.getQuantity()));
 
         JButton quantButton = new JButton("Change Quantity");
+        quantButton.setBackground(Color.BLUE);
+        quantButton.setForeground(Color.WHITE);
         quantButton.addActionListener(e-> {
             String text = inputQuantity.getText();
             if (text.matches("\\d+")) {

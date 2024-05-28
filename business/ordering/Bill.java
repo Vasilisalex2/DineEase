@@ -1,3 +1,5 @@
+package business.ordering;
+
 public class Bill {
     private Order order;
     private double totalPrice = 0;
@@ -9,6 +11,7 @@ public class Bill {
     }
 
     public Order getOrder() {
+
         return order;
     }
 

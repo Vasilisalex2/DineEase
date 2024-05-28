@@ -8,126 +8,93 @@ import users.Customer;
 import users.Person;
 
 import javax.swing.*;
-import javax.swing.table.TableCellRenderer;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 public class MenuUI extends JFrame {
-    //Menu menu{
     private boolean butDisable;
-    public MenuUI(Person user,Business business, Menu menu){
+
+    public MenuUI(Person user, Business business, Menu menu, Point location) {
         butDisable = false;
+        setTitle("Menu");
+        setSize(460, 680);
+        setLocation(location);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JFrame frame = new JFrame("Menu");
-        frame.setSize(460,680);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //frame.setLayout(null);
-        JPanel panel1 = new JPanel();
-        panel1.setSize(300, 600);
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-        JPanel panel2 = new JPanel();
-        panel2.setBackground(Color.BLUE);
-        JButton butBasket = new JButton("Basket");
-        JButton butWaiter = new JButton("Call Waiter");
-        butBasket.addActionListener(e -> {
-            new BasketUI(user,business);
-            frame.dispose();
+        ArrayList<Dish> dishes = menu.getMenu();
+        for (Dish dish : dishes) {
+            JPanel dishPanel = createDishPanel(user, business, dish);
+            mainPanel.add(dishPanel);
+        }
+
+        JScrollPane scrollPane = new JScrollPane(mainPanel);
+        add(scrollPane, BorderLayout.CENTER);
+
+        JPanel panel2 = createPanel2(user, business);
+        add(panel2, BorderLayout.SOUTH);
+
+        setVisible(true);
+    }
+
+    private JPanel createDishPanel(Person user, Business business, Dish dish) {
+        JPanel dishPanel = new JPanel();
+        dishPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+        JButton dishButton = new JButton(dish.getName());
+        dishButton.setPreferredSize(new Dimension(410, 50));
+        dishButton.setBackground(Color.BLUE);
+        dishButton.setForeground(Color.WHITE);
+        dishButton.addActionListener((ActionEvent e) -> {
+            new DishUI(user, business, dish, this.getLocation());
+            dispose();
         });
+
+
+        dishPanel.add(dishButton);
+        return dishPanel;
+    }
+
+    private JPanel createPanel2(Person user, Business business) {
+        JPanel panel2 = new JPanel();
+
+        JButton backButton = new JButton("Back");
+        backButton.setBackground(Color.BLUE);
+        backButton.setForeground(Color.WHITE);
+        backButton.addActionListener(e -> {
+            if(user instanceof Customer) {
+                new BusinessUI((Customer) user,business,this.getLocation());
+            }
+            else{
+                new DashboardUI(user,business,this.getLocation());
+            }
+            dispose();
+        });
+        JButton butBasket = new JButton("Basket");
+        butBasket.setBackground(Color.BLUE);
+        butBasket.setForeground(Color.WHITE);
+        butBasket.addActionListener(e -> {
+            new BasketUI(user, business,this.getLocation());
+            dispose();
+        });
+        JButton butWaiter = new JButton("Call Waiter");
+        butWaiter.setBackground(Color.BLUE);
+        butWaiter.setForeground(Color.WHITE);
         butWaiter.addActionListener(e -> {
-            if(user instanceof Customer){
-                if(!butDisable && ((Customer) user).isCheckedIN()){
-                    GeneralTask callWaiter = new GeneralTask();
-                    callWaiter.setType(GeneralTask.taskType.tableCall);
-                    callWaiter.setTable(((Customer)user).getTable());
-                    butDisable = true;
-                }
+            if (user instanceof Customer && !butDisable && ((Customer) user).isCheckedIN()) {
+                GeneralTask callWaiter = new GeneralTask("Table Call", GeneralTask.taskType.tableCall);
+                callWaiter.setTable(((Customer) user).getTable());
+                butDisable = true;
             }
         });
+
+        panel2.add(backButton);
         panel2.add(butBasket);
         panel2.add(butWaiter);
 
-        String col = "Dishes";
-
-        ArrayList<Dish> dishes = menu.getMenu();
-
-        Object[][] data = new Object[dishes.size()][1];
-        for (int i = 0; i < dishes.size(); i++) {
-            data[i][0] = dishes.get(i);
-        }
-
-
-        String[] columnNames = { "Dishes" };
-        JTable table = new JTable(data, columnNames);
-        // Set custom renderer and editor for each cell
-        table.setDefaultRenderer(Object.class, new ButtonRenderer());
-        table.setDefaultEditor(Object.class, new ButtonEditor(user,business, new JCheckBox()));
-
-        JScrollPane scrollPane = new JScrollPane(table);
-        panel1.add(scrollPane, BorderLayout.CENTER);
-
-        frame.add(panel1,BorderLayout.NORTH);
-        frame.add(panel2, BorderLayout.SOUTH);
-
-        frame.setVisible(true);
-
+        return panel2;
     }
-
-
-}
-
-
-
-// Custom renderer for displaying buttons
-class ButtonRenderer extends JButton implements TableCellRenderer {
-    private Dish dish;
-    public ButtonRenderer() {
-        setOpaque(true);
-    }
-
-    //public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-      //  return null;
-    //}
-    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        dish = (Dish) value;
-        setText(value != null ? dish.getName() : "");
-        return this;
-    }
-}
-
-// Custom editor for handling button clicks
-class ButtonEditor extends DefaultCellEditor {
-    private JButton button;
-    private String label;
-    private boolean isPushed;
-    private Dish dish;
-
-    public ButtonEditor(Person user, Business business, JCheckBox checkBox) {
-        super(checkBox);
-        button = new JButton();
-        //button.setOpaque(true);
-        button.addActionListener(e -> {
-            new DishUI(user,business,dish);
-            fireEditingStopped();
-            //frane.dispose();
-        });
-    }
-
-    @Override
-    public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-        dish = (Dish) value;
-        button.setText((dish == null) ? "" : dish.getName());
-        return button;
-    }
-
-    @Override
-    public Object getCellEditorValue() {
-        return dish;
-    }
-
-    /*@Override
-    public boolean stopCellEditing() {
-        isPushed = false;
-        return super.stopCellEditing();
-    }*/
-
 }

@@ -2,6 +2,7 @@ package GUI;
 
 import business.Business;
 import business.StoreRating;
+import business.Table;
 import users.Customer;
 import users.Owner;
 
@@ -44,7 +45,7 @@ public class ReviewsUI extends JFrame {
         JButton backButton = new JButton("Back");
         backButton.setPreferredSize(new Dimension(100, 30));
         backButton.addActionListener(e -> {
-            new BusinessUI(user, business);
+            new BusinessUI(user, business,this.getLocation());
             dispose();
         });
 

@@ -22,7 +22,7 @@ public class StorageHandlingOUI2 extends JPanel {
     public StorageHandlingOUI2(Owner user, Business business) {
 
 
-        setSize(460, 680);
+        setSize(400, 680);
         setLayout(new BorderLayout());
 
 
@@ -35,6 +35,8 @@ public class StorageHandlingOUI2 extends JPanel {
         add(bottomPanel, BorderLayout.SOUTH);
 
         JButton button = new JButton("Order");
+        button.setBackground(Color.BLUE);
+        button.setForeground(Color.WHITE);
         //Button Order
         button.addActionListener(e->{
             //createSupplierOrder();

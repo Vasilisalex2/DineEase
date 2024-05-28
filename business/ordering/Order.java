@@ -25,7 +25,7 @@ public class Order extends Task {
     //add a static variable to uniquely identify orders, the fact that is static makes it common to all order objects
     private static int lastId = 0;
     private int id = 0;
-
+    private int tableId;
 
     public Order(){
         orderCreate = new Date();
@@ -62,6 +62,19 @@ public class Order extends Task {
     }
     public void setOrderFinish() {
         this.orderFinish = new Date();
+    }
+
+
+
+
+
+    public int getTableId() {
+        return tableId;
+    }
+
+
+    public void setTableId(int tableId) {
+        this.tableId = tableId;
     }
 
 
