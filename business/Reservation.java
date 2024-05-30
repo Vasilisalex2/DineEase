@@ -44,7 +44,7 @@ public class Reservation {
     }
 
 
-    public void showCheckIn() {
+    public String showCheckIn() {
         String Details =   "Reservation{" +
                 " \nresId=" + resId +
                 ", \ncustomerId='" + customerId + '\'' +
@@ -54,9 +54,7 @@ public class Reservation {
                 ", \ntableId=" + tableId +
                 '}';
 
-        CheckInUI checkInUI = new CheckInUI();
-        checkInUI.setReservationDetails(Details);
-
+        return Details ;
     }
 
 

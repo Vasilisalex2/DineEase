@@ -221,26 +221,21 @@ public class Business {
         }
         return null; // If no table with the given ID is found
     }
-    public boolean reservationCheck(int CustomerId) {
-
+    public Reservation reservationCheck(int customerId) {
         for (Reservation reservation : reservations) {
-            if (reservation.getCustomerId() == CustomerId) {
+            if (reservation.getCustomerId() == customerId) {
                 // Update table status to "Occupied" for the reservation's table ID
                 for (Table table : tables) {
                     if (table.getTableId() == reservation.getTableId()) {
                         table.notFreeTable(); // Update table status
-                        break;
+                        System.out.println("Reservation found for " + name + ":");
+                        reservation.showCheckIn();
+                        return reservation;
                     }
                 }
-
-                System.out.println("Reservation found for " + name + ":");
-                reservation.showCheckIn();
-
             }
         }
-        System.out.println("No reservation found for " + CustomerId);
-
-        return false;
+        System.out.println("No reservation found for " + customerId);
+        return null;
     }
 }
-

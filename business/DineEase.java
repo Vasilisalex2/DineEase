@@ -50,16 +50,17 @@ public class DineEase {
         }
         return null; // If no business with the given name is found
     }
-    public static boolean reservationCheck(int customerId) {
-        boolean reservationFound = false;
+    public static Reservation reservationCheck(int customerId) {
+        Reservation foundReservation = null;
 
         for (Business business : businesses) {
-            if (business.reservationCheck(customerId)) {
-                reservationFound = true;
+            Reservation reservation = business.reservationCheck(customerId);
+            if (reservation != null) {
+                foundReservation = reservation;
                 break;
             }
         }
 
-        return reservationFound;
+        return foundReservation;
     }
 }

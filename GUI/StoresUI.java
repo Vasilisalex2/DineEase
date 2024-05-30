@@ -32,13 +32,13 @@ public class StoresUI extends JFrame {
 
                 customerName = customerNameField.getText();
                 int customerId = Integer.parseInt(customerName);
-                boolean reservationFound = DineEase.reservationCheck(customerId);
-                if (!reservationFound) {
+               // boolean reservationFound = DineEase.reservationCheck(customerId);
+                //if (!reservationFound) {
                     // No reservation found, open the scanner UI
-                    ScannerUI scannerUI = new ScannerUI();
+                  //  ScannerUI scannerUI = new ScannerUI();
                 }
-                dispose();
-            }
+                //dispose();
+           // }
         });
 
 
@@ -58,7 +58,7 @@ public class StoresUI extends JFrame {
                         if (tableId != -1) {
                             Bill bill = new Bill(business.findOrderByTableId(tableId), tableId);
                             String billDetails = bill.generateBillDetails();
-                            BillUI billUI = new BillUI(billDetails, tableId, "", "customer");
+                            BillUI billUI = new BillUI(billDetails, tableId, business, "customer");
                         } else {
                             JOptionPane.showMessageDialog(null, "No table found for customer ID: " + customerId);
                         }

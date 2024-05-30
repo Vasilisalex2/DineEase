@@ -38,9 +38,7 @@ public class Dish implements Cloneable{
   public void setQuantity(int id){
     this.quantity = id;
   }
-  public void setTable(Table table){
-    this.table = table;
-  }
+  public void setTable(Table table){this.table = table;}
   public Table getTable(){
     return this.table;
   }

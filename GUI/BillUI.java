@@ -22,14 +22,14 @@ public class BillUI extends JFrame {
     private int tableId;
     private String BusinessName;
 
-    public BillUI(String billDetails, int tableId, String BusinessName1, String userRole) {
+    public BillUI(String billDetails, int tableId, Business business, String userRole) {
         setTitle("Bill UI");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 300);
         setLocationRelativeTo(null);
         setContentPane(BillUI);
         setVisible(true);
-        this.BusinessName = BusinessName1;
+
         this.tableId = tableId;
         setBillDetails(billDetails);
 
@@ -81,7 +81,7 @@ public class BillUI extends JFrame {
 
     private void removeBill(int tableId) {
 
-        business = findBusinessByName(BusinessName);
+
         business.ordering.Bill billToRemove = business.getBill(tableId);
         if (billToRemove != null) {
             business.removeBill(billToRemove);

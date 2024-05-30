@@ -16,17 +16,16 @@ public class EntranceUI extends JFrame {
     private JTextPane numberOfPeopleTextPane;
     private JTextField numberofpeople;
     private JButton continueButton;
-    private JTextField businessNameField;
     private JLabel businessNameLabel;
     private int tableid1;
     private int numberofpeople1;
     private String status1;
     private JTextPane nubmerOfPeopleTextPane;
-    private JTextPane businessTextPane;
-    private String businessName1;
-    private String Details;
 
-    public EntranceUI() {
+    private String Details;
+    private Business business;
+
+    public EntranceUI(Business business) {
         setTitle("EntranceUI");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(300, 200);
@@ -46,31 +45,25 @@ public class EntranceUI extends JFrame {
 
         tableid1 = Integer.parseInt(tableid.getText());
         numberofpeople1 = Integer.parseInt(numberofpeople.getText());
-        businessName1 = businessNameField.getText(); // Get the entered business name
 
         Table selectedTable = null;
-        Business selectedBusiness = null;
+        Business selectedBusiness = business;
 
-        // Search for the business by name
-        for (Business business : DineEase.getBusinesses()) {
-            if (business.getName().equalsIgnoreCase(businessName1)) {
-                selectedBusiness = business;
 
-                // Search for the table by ID in the selected business
-                for (Table table : selectedBusiness.getTables()) {
-                    if (table.getTableId() == tableid1) {
-                        selectedTable = table;
-                        break;
-                    }
-                }
-                break; // Exit the loop if the business is found
+        // Search for the table by ID in the selected business
+        for (Table table : selectedBusiness.getTables()) {
+            if (table.getTableId() == tableid1) {
+                selectedTable = table;
+                break;
             }
         }
+
+
         // Check if the table is found within the business
         if (selectedTable != null) {
             // Check the number of people against the table capacity
             if (numberofpeople1 > selectedTable.getCapacity()) {
-                JOptionPane.showMessageDialog(null, "The number of people exceeds the capacity of table " + tableid1 + " in " + businessName1 + ".");
+                JOptionPane.showMessageDialog(null, "The number of people exceeds the capacity of table " + tableid1 + " in " + selectedBusiness.getName() + ".");
             } else {
                 // Check the status of the selected table
                 if (selectedTable.getStatus() == Table.eStatus.FREE) {
@@ -83,11 +76,11 @@ public class EntranceUI extends JFrame {
                     // MenuUI menuUI = new MenuUI("","","");
                     dispose();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Table with ID " + tableid1 + " is not free in " + businessName1 + ".");
+                    JOptionPane.showMessageDialog(null, "Table with ID " + tableid1 + " is not free in " + selectedBusiness.getName() + ".");
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Table with ID " + tableid1 + " not found in " + businessName1 + ".");
+            JOptionPane.showMessageDialog(null, "Table with ID " + tableid1 + " not found in " + selectedBusiness.getName() + ".");
         }
 
     }
@@ -156,28 +149,10 @@ public class EntranceUI extends JFrame {
         continueButton.setText("Continue");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 7;
+        gbc.gridy = 5;
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         EntranceUI.add(continueButton, gbc);
-        businessNameField = new JTextField();
-        businessNameField.setText("");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 6;
-        gbc.weightx = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        EntranceUI.add(businessNameField, gbc);
-        businessTextPane = new JTextPane();
-        businessTextPane.setText("Business Name :");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 5;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.fill = GridBagConstraints.BOTH;
-        EntranceUI.add(businessTextPane, gbc);
     }
 
     /**

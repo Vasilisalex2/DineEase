@@ -1,9 +1,13 @@
 package GUI;
 
+import business.Business;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import users.Customer;
 
 public class CheckInUI extends JFrame {
     private JPanel CheckInUI;
@@ -11,7 +15,7 @@ public class CheckInUI extends JFrame {
     private JButton cancelButton;
     private JButton continueButton;
 
-    public CheckInUI() {
+    public CheckInUI(Customer user, Business business, Point location) {
 
         setTitle("CheckIn UI");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -23,17 +27,19 @@ public class CheckInUI extends JFrame {
         continueButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //  MenuUI MenuUi = new MenuUI();
+                //MenuUI MenuUi = new MenuUI();
                 dispose();
             }
         });
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                StoresUI storesUI = new StoresUI();
+                BusinessUI dashboardUI = new BusinessUI(user, business, location);
                 dispose();
             }
         });
+
+
     }
 
     // Method to set the reservation details in the text area

@@ -18,7 +18,7 @@ public class CurBillUI extends JFrame {
     private Business business;
     private String BusinessName1;
 
-    public CurBillUI(String BusinessName) {
+    public CurBillUI(Business  business) {
 
         setTitle("CurBill UI");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,12 +31,11 @@ public class CurBillUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     tableid = Integer.parseInt(tableId.getText());
-                    BusinessName1 = BusinessName;
-                    business = DineEase.findBusinessByName(BusinessName1);
+
                     Bill bill = business.getBill(tableid);
                     if (bill != null) {
                         String billDetails = bill.generateBillDetails();
-                        BillUI billUI = new BillUI(billDetails, tableid, BusinessName, "worker");
+                        BillUI billUI = new BillUI(billDetails, tableid, business, "worker");
                     } else {
                         JOptionPane.showMessageDialog(null, "No bill found for Table ID: " + tableid);
                     }

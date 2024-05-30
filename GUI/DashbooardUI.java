@@ -1,5 +1,7 @@
 package GUI;
 
+import business.Business;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,7 +13,7 @@ public class DashbooardUI extends JFrame {
     private JButton checkInButton;
     private JButton checkOutButton;
 
-    public DashbooardUI() {
+    public DashbooardUI(Business business) {
         setTitle("DashboardUI UI");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(300, 200);
@@ -21,15 +23,15 @@ public class DashbooardUI extends JFrame {
         checkInButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                EntranceUI entranceUI = new EntranceUI();
+                EntranceUI entranceUI = new EntranceUI(business);
             }
         });
         checkOutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                String BusinessA = "Business A";
-                CurBillUI curBillUI = new CurBillUI(BusinessA);
+
+                CurBillUI curBillUI = new CurBillUI(business);
             }
         });
     }
