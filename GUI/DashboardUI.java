@@ -1,6 +1,7 @@
 package GUI;
 
 import business.Business;
+import business.timetable.TimerUI;
 import users.Owner;
 import users.Worker;
 import users.Person;
@@ -77,6 +78,18 @@ public class DashboardUI extends JFrame {
             add(taskButton);
 
 
+
+            JButton checkInOutWorkerButton = new JButton("Check-In/Out Worker");
+            checkInOutWorkerButton.setBounds(160, 380, 100, 30); // Adjust size and position as needed
+            checkInOutWorkerButton.setBackground(Color.BLUE);
+            checkInOutWorkerButton.setForeground(Color.WHITE);
+            checkInOutWorkerButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                ScannerWorkerUI scanner = new ScannerWorkerUI(((Worker) user));
+                }
+            });
+            add(checkInOutWorkerButton);
             checkInButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -94,6 +107,19 @@ public class DashboardUI extends JFrame {
                 }
             });
             add(checkOutButton);
+
+            // Create the "Break" button
+            JButton breakButton = new JButton("Break");
+            breakButton.setBounds(160, 330, 100, 30); // Adjust size and position as needed
+            breakButton.setBackground(Color.BLUE);
+            breakButton.setForeground(Color.WHITE);
+            breakButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    new TimerUI(500);
+                }
+            });
+            add(breakButton);
         }
 
         setVisible(true);

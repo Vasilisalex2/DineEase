@@ -139,9 +139,9 @@ public class Main {
         businessDemo.addReservation(reservation1);
         Objection objection = new Objection(event2, "I am unavailable after 4");
         Objection objection1 = new Objection(event4, "I'll be there by 10:10");
-        // DashboardUI dashboardUI1 = new DashboardUI(waiter,businessDemo,location);
+         DashboardUI dashboardUI1 = new DashboardUI(waiter,businessDemo,location);
 
-        BusinessUI dashboardUI = new BusinessUI(customer1,businessDemo,location);
+      //  BusinessUI dashboardUI = new BusinessUI(customer1,businessDemo,location);
 
 
     }
