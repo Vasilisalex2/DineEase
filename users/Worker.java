@@ -27,6 +27,12 @@ public class Worker extends Person {
         this.workerTimeLog = new ArrayList<>();
 
     }
+
+    @Override
+    public String toString() {
+        return fullName;
+    }
+
     public TaskList getTaskList() {
         return taskList;
     }

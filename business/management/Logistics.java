@@ -56,4 +56,8 @@ public class Logistics {
         }
         return outgoing;
     }
+
+    public ArrayList<Transaction> getTransactions() {
+        return transactions;
+    }
 }

@@ -1,5 +1,6 @@
 package business;
 import business.management.ClientStatistics;
+import business.management.Logistics;
 import business.management.OrderStatistics;
 import business.management.Storage;
 import business.ordering.*;
@@ -24,7 +25,7 @@ public class Business {
     private String description;
     private ArrayList<Worker> workers;
     private Menu menu;
-    private TaskList taskList; //TODO why would the business have a tasklist? each worker has a separate tasklist
+    private TaskList taskList;
     private ArrayList<Subscription> subscriptionList;
     private Timetable timetable;
     private Storage storage;
@@ -36,6 +37,7 @@ public class Business {
     private ArrayList<Reservation> reservations;
     private ArrayList<Bill> bills;
     private static ArrayList<Order> orders;
+    private Logistics logistics;
 
     public Business(int id){
         this.reservations = new ArrayList<>();
@@ -49,6 +51,12 @@ public class Business {
         this.id = id;
         this.taskList = new TaskList();
         this.tables = new ArrayList<Table>();
+        this.subscriptionList = new ArrayList<>();
+        this.logistics = new Logistics();
+        this.workers =new ArrayList<>();
+        this.timetable = new Timetable();
+        this.orderStatistics = new OrderStatistics();
+        this.orderHistory = new OrderHistory();
         for(int i =0; i<100; ++i){
             menu.addToMenu(new Dish("Ok" + i));
         }
@@ -237,5 +245,21 @@ public class Business {
         }
         System.out.println("No reservation found for " + customerId);
         return null;
+    }
+
+    public ArrayList<Subscription> getSubscriptionList() {
+        return subscriptionList;
+    }
+
+    public Logistics getLogistics() {
+        return logistics;
+    }
+
+    public Timetable getTimetable() {
+        return timetable;
+    }
+
+    public void setTimetable(Timetable timetable) {
+        this.timetable = timetable;
     }
 }

@@ -2,8 +2,6 @@ package business.timetable;
 
 import users.Worker;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 /**
  * This class has the attributes of an Event object in the Timetable class
@@ -15,21 +13,43 @@ import java.time.LocalTime;
 public class Event {
     private Worker worker;
     private String title;
-    private String description;
-    private String place;
-    private LocalDate date;
-    private LocalTime time;
-    private int duration;
+    private String day;
 
-    public Event(Worker worker, String title, String description, String place, LocalDate date, LocalTime time, int duration) {
+//    time is formated like this
+//    String[] times = {
+//            "08-09", "09-10", "11-12", "13-14", "15-16", "17-18",
+//            "19-20", "21-22", "23-00", "00-01", "01-02", "02-03",
+//            "04-05", "05-06", "06-07", "07-08"
+//    };
+    private String startTime;
+    private String duration;
+
+
+    public Event(Worker worker, String title, String day, String startTime, String endTime) {
         this.worker = worker;
         this.title = title;
-        this.description = description;
-        this.place = place;
-        this.date = date;
-        this.time = time;
-        this.duration = duration;
+        this.day = day;
+        this.startTime = startTime;
+        this.duration = endTime;
     }
 
-  
+    public Worker getWorker() {
+        return worker;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
 }

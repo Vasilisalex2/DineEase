@@ -13,13 +13,24 @@ import users.Customer;
 public class Subscription {
     private Customer customer = null;
     private Order order = null;
-    private String time = null; // order frequency
+    private String frequency; // order frequency Daily/Weekly/Monthly
 
-    public Subscription(Customer customer, Order order, String time) {
+    public Subscription(Customer customer, Order order, String frequency) {
         this.customer = customer;
         this.order = order;
-        this.time = time;
+        this.frequency = frequency;
 
     }
-  
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public String getFrequency() {
+        return frequency;
+    }
 }
