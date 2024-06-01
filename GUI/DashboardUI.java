@@ -12,9 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class DashboardUI extends JFrame {
-    private JButton checkInButton;
-    private JButton checkOutButton;
-    private JLabel dashboardLabel;
 
     public DashboardUI(Person user, Business business, Point location) {
         setTitle("Dashboard");
@@ -22,19 +19,23 @@ public class DashboardUI extends JFrame {
         setLocation(location);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
-
         JButton storageButton = new JButton("Storage");
-        storageButton.setBounds(160, 80, 100, 30);
+        storageButton.setBounds(155, 80, 150, 30);
         JButton menuButton = new JButton("Menu");
-        menuButton.setBounds(160, 30, 100, 30);
+        menuButton.setBounds(155, 30, 150, 30);
         JButton resButton = new JButton("Reservation");
-        resButton.setBounds(160, 130, 100, 30);
+        resButton.setBounds(155, 130, 150, 30);
         JButton taskButton = new JButton("Tasks");
-        taskButton.setBounds(160, 180, 100, 30);
+        taskButton.setBounds(155, 180, 150, 30);
         JButton checkInButton = new JButton("Check-in");
-        checkInButton.setBounds(160, 230, 100, 30);
+        checkInButton.setBounds(155, 230, 150, 30);
         JButton checkOutButton = new JButton("Check-out");
-        checkOutButton.setBounds(160, 280, 100, 30);
+        checkOutButton.setBounds(155, 280, 150, 30);
+
+        checkOutButton.setBackground(Color.BLUE);
+        checkOutButton.setForeground(Color.WHITE);
+        checkInButton.setBackground(Color.BLUE);
+        checkInButton.setForeground(Color.WHITE);
 
         storageButton.addActionListener(e -> {
             if (user instanceof Owner) {
@@ -75,12 +76,22 @@ public class DashboardUI extends JFrame {
         add(resButton);
 
         if (user instanceof Worker) {
+            JButton workerTimetableButton = new JButton("Timetable");
+            workerTimetableButton.setBounds(155, 430, 150, 30);
+            workerTimetableButton.setBackground(Color.BLUE);
+            workerTimetableButton.setForeground(Color.WHITE);
+
+            workerTimetableButton.addActionListener(e -> {
+                new WorkerTimetable(business);
+                //dispose();
+            });
+            add(workerTimetableButton);
             add(taskButton);
 
 
 
             JButton checkInOutWorkerButton = new JButton("Check-In/Out Worker");
-            checkInOutWorkerButton.setBounds(160, 380, 100, 30); // Adjust size and position as needed
+            checkInOutWorkerButton.setBounds(155, 380, 150, 30); // Adjust size and position as needed
             checkInOutWorkerButton.setBackground(Color.BLUE);
             checkInOutWorkerButton.setForeground(Color.WHITE);
             checkInOutWorkerButton.addActionListener(new ActionListener() {
@@ -108,9 +119,8 @@ public class DashboardUI extends JFrame {
             });
             add(checkOutButton);
 
-            // Create the "Break" button
             JButton breakButton = new JButton("Break");
-            breakButton.setBounds(160, 330, 100, 30); // Adjust size and position as needed
+            breakButton.setBounds(155, 330, 150, 30); // Adjust size and position as needed
             breakButton.setBackground(Color.BLUE);
             breakButton.setForeground(Color.WHITE);
             breakButton.addActionListener(new ActionListener() {
