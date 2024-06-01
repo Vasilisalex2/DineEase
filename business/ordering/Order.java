@@ -64,10 +64,6 @@ public class Order extends Task {
         this.orderFinish = new Date();
     }
 
-
-
-
-
     public int getTableId() {
         return tableId;
     }

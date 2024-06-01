@@ -57,6 +57,7 @@ public class Business {
         this.timetable = new Timetable();
         this.orderStatistics = new OrderStatistics();
         this.orderHistory = new OrderHistory();
+        this.clientStatistics = new ClientStatistics();
         for(int i =0; i<100; ++i){
             menu.addToMenu(new Dish("Ok" + i));
         }

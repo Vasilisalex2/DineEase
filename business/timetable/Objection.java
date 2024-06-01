@@ -16,4 +16,12 @@ public class Objection {
         this.event = event;
         this.description = description;
     }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 }

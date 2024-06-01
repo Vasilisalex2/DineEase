@@ -1,15 +1,25 @@
-package ui.owner;
+package GUI;
+
+/**
+ * This class has Timetable and statistics tools for the business owner
+ * An instance of this class is generated from the main dashboard of the owner
+ *
+ * @author NIKOS
+ * @version 1.0
+ */
 
 import business.Business;
+import business.GeneralTask;
 import business.Subscription;
+import business.Task;
 import business.management.CheckInOutEvent;
 import business.management.Transaction;
+import business.timetable.Objection;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import users.Worker;
 import business.timetable.Event;
-import business.ordering.Order;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -18,21 +28,19 @@ import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Map;
+import java.util.Random;
 
 public class OwnerMainScreen extends JFrame {
     private JTabbedPane tabbedPane1;
     private JTabbedPane tabbedPane2;
-    private JTabbedPane tabbedPane3;
     private JTable checkInOutWorkerStats;
-    private JTable table2;
     private JPanel mainPanel;
     private JTabbedPane tabbedPane4;
     private JTable avgStayTable;
     private JTable orderCompTimeTable;
-    private JTable table6;
     private JTable topPicksTable;
     private JTable subscriptionsTable;
     private JTabbedPane tabbedPane6;
@@ -43,7 +51,6 @@ public class OwnerMainScreen extends JFrame {
     private JComboBox startTimeComboBox;
     private JComboBox durationComboBox;
     private JButton addEventButton;
-    private JPanel CheckInOutScroll;
     private JComboBox payWorkers;
     private JTextField payAmount;
     private JButton payWorkerButton;
@@ -84,14 +91,18 @@ public class OwnerMainScreen extends JFrame {
         populateEventFormBoxes();
 
         createTransactionButton();
+        populateObjectionsTable();
 
     }
+
+    //TODO add objections table
+    //TODO what to do with order stats
 
     //****************************
     //TIMETABLE METHODS
     //****************************
 
-    //TODO add objections table
+    //<editor-fold desc="TIMETABLE METHODS">
 
     public void populateTimeTableTable() {
 
@@ -135,71 +146,43 @@ public class OwnerMainScreen extends JFrame {
         //ArrayList<Event> events = ;
         for (Event event : business.getTimetable().getEvents()) {
             switch (event.getDay()) {
-                case "Monday":
-                    addEventToTable(model, event, findEventTime(event), 1);
-                    break;
-                case "Tuesday":
-                    addEventToTable(model, event, findEventTime(event), 2);
-                    break;
-                case "Wednesday":
-                    addEventToTable(model, event, findEventTime(event), 3);
-                    break;
-                case "Thursday":
-                    addEventToTable(model, event, findEventTime(event), 4);
-                    break;
-                case "Friday":
-                    addEventToTable(model, event, findEventTime(event), 5);
-                    break;
-                case "Saturday":
-                    addEventToTable(model, event, findEventTime(event), 6);
-                    break;
-                case "Sunday":
-                    addEventToTable(model, event, findEventTime(event), 7);
-                    break;
-                default:
+                case "Monday" -> addEventToTable(model, event, findEventTime(event), 1);
+                case "Tuesday" -> addEventToTable(model, event, findEventTime(event), 2);
+                case "Wednesday" -> addEventToTable(model, event, findEventTime(event), 3);
+                case "Thursday" -> addEventToTable(model, event, findEventTime(event), 4);
+                case "Friday" -> addEventToTable(model, event, findEventTime(event), 5);
+                case "Saturday" -> addEventToTable(model, event, findEventTime(event), 6);
+                case "Sunday" -> addEventToTable(model, event, findEventTime(event), 7);
+                default -> {
+                }
             }
         }
     }
 
     //find event details
     public int findEventTime(Event event) {
-        switch (event.getStartTime()) {
-            case "08-09":
-                return 0;
-            case "09-10":
-                return 1;
-            case "11-12":
-                return 2;
-            case "13-14":
-                return 3;
-            case "15-16":
-                return 4;
-            case "17-18":
-                return 5;
-            case "19-20":
-                return 6;
-            case "21-22":
-                return 7;
-            case "23-00":
-                return 8;
-            case "00-01":
-                return 9;
-            case "01-02":
-                return 10;
-            case "02-03":
-                return 11;
-            case "04-05":
-                return 12;
-            case "05-06":
-                return 13;
-            case "06-07":
-                return 14;
-            case "07-08":
-                return 15;
-            default:
+        return switch (event.getStartTime()) {
+            case "08-09" -> 0;
+            case "09-10" -> 1;
+            case "11-12" -> 2;
+            case "13-14" -> 3;
+            case "15-16" -> 4;
+            case "17-18" -> 5;
+            case "19-20" -> 6;
+            case "21-22" -> 7;
+            case "23-00" -> 8;
+            case "00-01" -> 9;
+            case "01-02" -> 10;
+            case "02-03" -> 11;
+            case "04-05" -> 12;
+            case "05-06" -> 13;
+            case "06-07" -> 14;
+            case "07-08" -> 15;
+            default -> {
                 System.out.println("Wrong time");
-                return -1;
-        }
+                yield -1;
+            }
+        };
     }
 
     //add event
@@ -212,9 +195,9 @@ public class OwnerMainScreen extends JFrame {
         }
     }
 
+    //add event form methods
     public void populateEventFormBoxes() {
         addWorkersToComboBox(eventWorkers);
-
 
         String[] Days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
         for (String day : Days) {
@@ -253,13 +236,26 @@ public class OwnerMainScreen extends JFrame {
         });
     }
 
+    public void populateObjectionsTable() {
+        String[] columnNames = {"Waiter", "Message"};
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+
+        for (Objection objection : business.getTimetable().getObjections()) {
+
+            model.addRow(new Object[]{objection.getEvent().getWorker().getFullName(), objection.getDescription()});
+        }
+
+        objectionsTable.setModel(model);
+
+    }
+    //</editor-fold>
 
     //****************************
     //ORDER STATS METHODS
     //****************************
 
     public void populateTopPicksTable() {
-        //WORKING CODE
+
         String[] columnNames = {"Dish", "Times Purchased"};
 
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
@@ -273,40 +269,33 @@ public class OwnerMainScreen extends JFrame {
             model.addRow(new Object[]{key, value});
         }
 
-//        //PREVIEW CODE
-//        String[] columnNames = {"Dish", "Times Purchased"};
-//
-//        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
-//
-//
-//        for (int i = 0; i < 30; i++) {
-//            model.addRow(new Object[]{i, i});
-//        }
-//        topPicksTable.setModel(model);
+        topPicksTable.setModel(model);
     }
 
     public void populateOrderCompTimeTable() {
-        //WORKING CODE
-        String[] columnNames = {"Order", "Time(hh:mm)"};
-
-        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
-
-
-        for (Order order : business.getOrders()) {
-            model.addRow(new Object[]{order.getId(), order.getOrderTotalTime()});
-
-        }
-        orderCompTimeTable.setModel(model);
-//        //PREVIEW CODE
+//        //WORKING CODE
 //        String[] columnNames = {"Order", "Time(hh:mm)"};
 //
 //        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 //
 //
-//        for (int i = 0; i < 30; i++) {
-//            model.addRow(new Object[]{i, "0:30"});
+//        for (Order order : business.getOrders()) {
+//            model.addRow(new Object[]{order.getId(), order.getOrderTotalTime()});
+//
 //        }
 //        orderCompTimeTable.setModel(model);
+        //PREVIEW CODE
+        String[] columnNames = {"Order", "Time(hh:mm)"};
+
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+
+        Random random = new Random();
+
+
+        for (int i = 0; i < 30; i++) {
+            model.addRow(new Object[]{i, "0:" + random.nextInt(10, 59)});
+        }
+        orderCompTimeTable.setModel(model);
     }
 
     //****************************
@@ -315,63 +304,35 @@ public class OwnerMainScreen extends JFrame {
 
     //<editor-fold desc="CUSTOMER STATS METHODS">
     public void populateAvgStayTable() {
-//        //WORKING CODE
-//        String[] columnNames = {"Day", "Stay(hh:mm)"};
-//
-//        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
-//
-//        model.addRow(new Object[]{"Monday", business.getClientStatistics().avgStayTime("Monday")});
-//        model.addRow(new Object[]{"Tuesday", business.getClientStatistics().avgStayTime("Tuesday")});
-//        model.addRow(new Object[]{"Wednesday", business.getClientStatistics().avgStayTime("Wednesday")});
-//        model.addRow(new Object[]{"Thursday", business.getClientStatistics().avgStayTime("Thursday")});
-//        model.addRow(new Object[]{"Friday", business.getClientStatistics().avgStayTime("Friday")});
-//        model.addRow(new Object[]{"Saturday", business.getClientStatistics().avgStayTime("Saturday")});
-//        model.addRow(new Object[]{"Sunday", business.getClientStatistics().avgStayTime("Sunday")});
-//
-//        peakHoursTable.setModel(model);
-        //PREVIEW CODE
 
         String[] columnNames = {"Day", "Stay(hh:mm)"};
 
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
-        model.addRow(new Object[]{"Monday", "0:30"});
-        model.addRow(new Object[]{"Tuesday", "1:30"});
-        model.addRow(new Object[]{"Wednesday", "1:00"});
-        model.addRow(new Object[]{"Thursday", "0:45"});
-        model.addRow(new Object[]{"Friday", "1:05"});
-        model.addRow(new Object[]{"Saturday", "2:00"});
-        model.addRow(new Object[]{"Sunday", "2:30"});
+
+        model.addRow(new Object[]{"Monday", business.getClientStatistics().avgStayTime("Monday")});
+        model.addRow(new Object[]{"Tuesday", business.getClientStatistics().avgStayTime("Tuesday")});
+        model.addRow(new Object[]{"Wednesday", business.getClientStatistics().avgStayTime("Wednesday")});
+        model.addRow(new Object[]{"Thursday", business.getClientStatistics().avgStayTime("Thursday")});
+        model.addRow(new Object[]{"Friday", business.getClientStatistics().avgStayTime("Friday")});
+        model.addRow(new Object[]{"Saturday", business.getClientStatistics().avgStayTime("Saturday")});
+        model.addRow(new Object[]{"Sunday", business.getClientStatistics().avgStayTime("Sunday")});
 
         avgStayTable.setModel(model);
     }
 
     public void populatePeakHoursTable() {
-//        //WORKING CODE
-//        String[] columnNames = {"Day", "Peak"};
-//
-//        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
-//
-//        model.addRow(new Object[]{"Monday", business.getClientStatistics().calculatePeakHours("Monday")});
-//        model.addRow(new Object[]{"Tuesday", business.getClientStatistics().calculatePeakHours("Tuesday")});
-//        model.addRow(new Object[]{"Wednesday", business.getClientStatistics().calculatePeakHours("Wednesday")});
-//        model.addRow(new Object[]{"Thursday", business.getClientStatistics().calculatePeakHours("Thursday")});
-//        model.addRow(new Object[]{"Friday", business.getClientStatistics().calculatePeakHours("Friday")});
-//        model.addRow(new Object[]{"Saturday", business.getClientStatistics().calculatePeakHours("Saturday")});
-//        model.addRow(new Object[]{"Sunday", business.getClientStatistics().calculatePeakHours("Sunday")});
-//
-//        peakHoursTable.setModel(model);
-        //PREVIEW CODE
 
         String[] columnNames = {"Day", "Peak"};
 
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
-        model.addRow(new Object[]{"Monday", "8:00"});
-        model.addRow(new Object[]{"Tuesday", "14:00"});
-        model.addRow(new Object[]{"Wednesday", "11:00"});
-        model.addRow(new Object[]{"Thursday", "18:00"});
-        model.addRow(new Object[]{"Friday", "20:00"});
-        model.addRow(new Object[]{"Saturday", "23:00"});
-        model.addRow(new Object[]{"Sunday", "00:00"});
+
+        model.addRow(new Object[]{"Monday", business.getClientStatistics().calculatePeakHours("Monday")});
+        model.addRow(new Object[]{"Tuesday", business.getClientStatistics().calculatePeakHours("Tuesday")});
+        model.addRow(new Object[]{"Wednesday", business.getClientStatistics().calculatePeakHours("Wednesday")});
+        model.addRow(new Object[]{"Thursday", business.getClientStatistics().calculatePeakHours("Thursday")});
+        model.addRow(new Object[]{"Friday", business.getClientStatistics().calculatePeakHours("Friday")});
+        model.addRow(new Object[]{"Saturday", business.getClientStatistics().calculatePeakHours("Saturday")});
+        model.addRow(new Object[]{"Sunday", business.getClientStatistics().calculatePeakHours("Sunday")});
 
         peakHoursTable.setModel(model);
     }
@@ -384,7 +345,6 @@ public class OwnerMainScreen extends JFrame {
     public void populateTransactionsTable() {
 
         String[] columnNames = {"Type", "Amount"};
-
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 
         for (Transaction transaction : business.getLogistics().getTransactions()) {
@@ -417,47 +377,69 @@ public class OwnerMainScreen extends JFrame {
     //WORKER STATS METHODS
     //****************************
     public void populateCheckInOutWorkerStatsTable() {
-        //Todo Add functional button
-        //WORKING CODE NO FUNCTIONAL BUTTON
-//        String[] columnNames = {"Full Name", "Type", "Date", "Sent Event"};
-//        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
-//
-//        ArrayList<Worker> workers = business.getWorkers();
-//        for (Worker worker : workers) {
-//
-//            String fullName = worker.getFullName();
-//
-//            for (CheckInOutEvent checkInOutEvent : worker.getWorkerTimeLog()) {
-//
-//                String type = checkInOutEvent.getType();
-//                Date date = checkInOutEvent.getDate();
-//
-//                model.addRow(new Object[]{fullName, type, date});
-//            }
-//        }
-//        //checkInOutWorkerStats = new JTable(fullname?????????);
-//
-//        checkInOutWorkerStats = new JTable(model);
-//        checkInOutWorkerStats.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
 
-        //PREVIEW CODE
-        String[] columnNames = {"Full Name", "Type", "Date", "Sent Event"};
-
+        String[] columnNames = {"Full Name", "Type", "Date", "Sent Task"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 
-        // create a row to repeat
-        String randomFullName = "John Jack";
-        String randomType = "Check-in";
-        Date currentDate = new Date();
+        ArrayList<Worker> workers = business.getWorkers();
+        for (Worker worker : workers) {
+            for (CheckInOutEvent checkInOutEvent : worker.getWorkerTimeLog()) {
 
+                String type = checkInOutEvent.getType();
+                LocalDateTime date = checkInOutEvent.getDate();
 
-        for (int i = 0; i < 30; i++) {
-            model.addRow(new Object[]{randomFullName, randomType, currentDate});
+                model.addRow(new Object[]{worker, type, date});
+            }
         }
 
         checkInOutWorkerStats.setModel(model);
-        checkInOutWorkerStats.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer("Send Event"));
 
+        checkInOutWorkerStats.getColumn("Sent Task").setCellRenderer(new ButtonRendererWorkerTask("Send Task"));
+        checkInOutWorkerStats.getColumn("Sent Task").setCellEditor(new ButtonEditorWorkerTask(checkInOutWorkerStats));
+    }
+
+    class ButtonRendererWorkerTask extends JButton implements TableCellRenderer {
+        public ButtonRendererWorkerTask(String label) {
+            setText(label);
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value,
+                                                       boolean isSelected, boolean hasFocus, int row, int column) {
+            return this;
+        }
+    }
+
+    class ButtonEditorWorkerTask extends AbstractCellEditor implements TableCellEditor, ActionListener {
+        private JTable table;
+        private JButton button;
+        private Worker worker;
+
+        public ButtonEditorWorkerTask(JTable table) {
+            this.table = table;
+            this.button = new JButton("Send Task");
+            this.button.addActionListener(this);
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value,
+                                                     boolean isSelected, int row, int column) {
+            this.worker = (Worker) table.getValueAt(row, 0);
+            return button;
+        }
+
+        @Override
+        public Object getCellEditorValue() {
+            return null;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Task task = new GeneralTask("Meet me after shift", GeneralTask.taskType.random);
+            worker.getTaskList().addTask(task);
+            System.out.println("Task added successfully for " + worker.getFullName());
+            fireEditingStopped();
+        }
     }
 
     //****************************
@@ -500,8 +482,6 @@ public class OwnerMainScreen extends JFrame {
 //        subscriptionsTable.setModel(model);
 //        subscriptionsTable.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer("Delete"));
     }
-
-
 
 
     //class to create buttons for subscription deletion
@@ -711,67 +691,59 @@ public class OwnerMainScreen extends JFrame {
         panel9.add(tabbedPane2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(200, 200), null, 0, false));
         final JPanel panel10 = new JPanel();
         panel10.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        tabbedPane2.addTab("Workers statistics", panel10);
-        tabbedPane3 = new JTabbedPane();
-        panel10.add(tabbedPane3, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(200, 200), null, 0, false));
-        CheckInOutScroll = new JPanel();
-        CheckInOutScroll.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        tabbedPane3.addTab("Check In/Out Log", CheckInOutScroll);
+        tabbedPane2.addTab("Workers Stats Check In/Out Log", panel10);
         final JScrollPane scrollPane4 = new JScrollPane();
-        CheckInOutScroll.add(scrollPane4, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        panel10.add(scrollPane4, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         checkInOutWorkerStats = new JTable();
         scrollPane4.setViewportView(checkInOutWorkerStats);
         final JPanel panel11 = new JPanel();
         panel11.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        tabbedPane3.addTab("Late/Overtime", panel11);
-        table2 = new JTable();
-        panel11.add(table2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        tabbedPane2.addTab("Orders statistics", panel11);
+        tabbedPane4 = new JTabbedPane();
+        panel11.add(tabbedPane4, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(200, 200), null, 0, false));
         final JPanel panel12 = new JPanel();
         panel12.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        tabbedPane2.addTab("Orders statistics", panel12);
-        tabbedPane4 = new JTabbedPane();
-        panel12.add(tabbedPane4, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(200, 200), null, 0, false));
+        tabbedPane4.addTab("Order completion time", panel12);
+        final JScrollPane scrollPane5 = new JScrollPane();
+        panel12.add(scrollPane5, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        orderCompTimeTable = new JTable();
+        scrollPane5.setViewportView(orderCompTimeTable);
         final JPanel panel13 = new JPanel();
         panel13.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        tabbedPane4.addTab("Order completion time", panel13);
-        orderCompTimeTable = new JTable();
-        panel13.add(orderCompTimeTable, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        tabbedPane4.addTab("Top picks", panel13);
         final JPanel panel14 = new JPanel();
         panel14.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        tabbedPane4.addTab("Avarage compl. time per item", panel14);
-        table6 = new JTable();
-        panel14.add(table6, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        panel13.add(panel14, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        final JScrollPane scrollPane6 = new JScrollPane();
+        panel14.add(scrollPane6, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        topPicksTable = new JTable();
+        scrollPane6.setViewportView(topPicksTable);
         final JPanel panel15 = new JPanel();
         panel15.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        tabbedPane4.addTab("Top picks", panel15);
-        topPicksTable = new JTable();
-        panel15.add(topPicksTable, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        tabbedPane2.addTab("Customer statitstics", panel15);
+        final JTabbedPane tabbedPane3 = new JTabbedPane();
+        panel15.add(tabbedPane3, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(200, 200), null, 0, false));
         final JPanel panel16 = new JPanel();
         panel16.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        tabbedPane2.addTab("Customer statitstics", panel16);
-        final JTabbedPane tabbedPane5 = new JTabbedPane();
-        panel16.add(tabbedPane5, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(200, 200), null, 0, false));
+        tabbedPane3.addTab("Day peak hours", panel16);
+        final JScrollPane scrollPane7 = new JScrollPane();
+        panel16.add(scrollPane7, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        peakHoursTable = new JTable();
+        scrollPane7.setViewportView(peakHoursTable);
         final JPanel panel17 = new JPanel();
         panel17.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        tabbedPane5.addTab("Day peak hours", panel17);
-        final JScrollPane scrollPane5 = new JScrollPane();
-        panel17.add(scrollPane5, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        peakHoursTable = new JTable();
-        scrollPane5.setViewportView(peakHoursTable);
+        tabbedPane3.addTab("Day avg. stay", panel17);
+        final JScrollPane scrollPane8 = new JScrollPane();
+        panel17.add(scrollPane8, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        avgStayTable = new JTable();
+        scrollPane8.setViewportView(avgStayTable);
         final JPanel panel18 = new JPanel();
         panel18.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        tabbedPane5.addTab("Day avg. stay", panel18);
-        final JScrollPane scrollPane6 = new JScrollPane();
-        panel18.add(scrollPane6, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        avgStayTable = new JTable();
-        scrollPane6.setViewportView(avgStayTable);
-        final JPanel panel19 = new JPanel();
-        panel19.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        tabbedPane1.addTab("Subscriptions", panel19);
-        final JScrollPane scrollPane7 = new JScrollPane();
-        panel19.add(scrollPane7, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        tabbedPane1.addTab("Subscriptions", panel18);
+        final JScrollPane scrollPane9 = new JScrollPane();
+        panel18.add(scrollPane9, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         subscriptionsTable = new JTable();
-        scrollPane7.setViewportView(subscriptionsTable);
+        scrollPane9.setViewportView(subscriptionsTable);
     }
 
     /**
@@ -780,4 +752,5 @@ public class OwnerMainScreen extends JFrame {
     public JComponent $$$getRootComponent$$$() {
         return mainPanel;
     }
+
 }
