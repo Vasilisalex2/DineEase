@@ -20,7 +20,7 @@ public class Basket {
         this.basket = new ArrayList<Dish>();
     }
     public ArrayList<Dish> getBasket() {
-        return basket;
+        return this.basket;
     }
     public void addToBasket(Dish dish, int quantity){
         dish.setQuantity(quantity);

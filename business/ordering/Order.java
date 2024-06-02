@@ -1,6 +1,4 @@
 package business.ordering;
-
-import business.Table;
 import business.Task;
 
 import java.util.ArrayList;

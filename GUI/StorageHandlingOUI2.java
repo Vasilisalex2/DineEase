@@ -2,17 +2,10 @@ package GUI;
 
 import business.Business;
 import business.ordering.Item;
-import business.ordering.Order;
-import users.Basket;
-import users.Customer;
-import users.Owner;
-import users.Worker;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 

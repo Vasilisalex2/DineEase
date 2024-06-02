@@ -1,7 +1,5 @@
 package users;
 
-import java.lang.reflect.Array;
-
 /**
  * brief description of the class.
  *
@@ -19,23 +17,16 @@ public class Person{
 
     private static int lastId = 0;
 
-    //TODO do we need this constructor? add basket with setter after the object creation?
-    public Person(){
-        this.id = 0;
-
-        this.basket = new Basket();
-    }
-
-    public Person(String fullName) {
+    public Person(String fullName){
         this.id = ++lastId;
-        this.fullName = fullName;
+        this.basket = new Basket();
     }
 
     public int getID() {
         return id;
     }
     public Basket getBasket() {
-        return basket;
+        return this.basket;
     }
 
     public String getFullName() {

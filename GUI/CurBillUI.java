@@ -1,7 +1,6 @@
 package GUI;
 
 import business.Business;
-import business.DineEase;
 import business.ordering.Bill;
 
 import javax.swing.*;
@@ -15,8 +14,6 @@ public class CurBillUI extends JFrame {
     private JButton showBillButton;
     private JFormattedTextField insertTableIdFormattedTextField;
     private int tableid;
-    private Business business;
-    private String BusinessName1;
 
     public CurBillUI(Business  business) {
 

@@ -2,9 +2,7 @@ package GUI;
 
 import business.Business;
 import business.StoreRating;
-import business.Table;
 import users.Customer;
-import users.Owner;
 
 import javax.swing.*;
 import java.awt.*;

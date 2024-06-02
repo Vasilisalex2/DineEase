@@ -4,10 +4,8 @@ import business.Task;
 import business.TaskList;
 import business.management.CheckInOutEvent;
 
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * worker class extends the class and has additional fields and methods for persons who work at the business

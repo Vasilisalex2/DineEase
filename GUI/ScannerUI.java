@@ -1,6 +1,5 @@
 package GUI;
 
-import GUI.MenuUI;
 import business.Business;
 import business.Table;
 import business.DineEase;
