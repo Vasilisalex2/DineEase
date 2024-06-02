@@ -10,12 +10,10 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 /**
- * brief description of the class.
- * <p>
- * if necessary
- * add detailed description of the class purpose, functionality, usage
+ * This class shares the same methods as the Timetable JPanel in OwnerMainScreen, but it can only load the timetable.
+ * Objection functionality is not implemented
  *
- * @author NAME
+ * @author NIKOS
  * @version 1.0
  */
 public class WorkerTimetable extends JFrame {
@@ -27,7 +25,7 @@ public class WorkerTimetable extends JFrame {
     public WorkerTimetable(Business business) {
         setSize(800, 600);
         setTitle("WorkerTimetable");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setContentPane(panel1);
 
@@ -117,7 +115,7 @@ public class WorkerTimetable extends JFrame {
         };
     }
 
-    //add event
+    //add event to table
     public void addEventToTable(DefaultTableModel model, Event event, int row, int column) {
         //repeat for the duration of event
         //Code doesnt check for out of bounds conditions

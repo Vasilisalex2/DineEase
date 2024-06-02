@@ -1,15 +1,20 @@
 import GUI.BusinessesUI;
 import GUI.DashboardUI;
-import business.Business;
-import business.DineEase;
-import business.StoreRating;
+import business.*;
+import business.management.CheckInOutEvent;
+import business.management.Transaction;
 import business.ordering.Dish;
 import business.ordering.Item;
 import business.ordering.Order;
+import business.timetable.Event;
+import business.timetable.Objection;
+import business.timetable.Timetable;
 import users.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDateTime;
+
 
 class MainUI extends JFrame {
     public MainUI() {
@@ -96,7 +101,188 @@ class MainUI extends JFrame {
 public class Main {
 
     public static void main(String[] args) {
+        //***************
+        //INITIALIZE DATA
+        //***************
+
+        DineEase app = new DineEase();
+        //Business
+        Business businessDemo = new Business(1);
+        app.addBusiness(businessDemo);
+        Business business = app.getBusinesses().get(0);
+
+        //Owner
+        Person owner = new Owner("Alice");
+
+        //Waiters
+        Worker waiter = new Waiter("Bob");
+        Worker waiter1 = new Waiter("John");
+        Worker waiter2 = new Waiter("Kevin");
+
+        businessDemo.getWorkers().add(waiter);
+        businessDemo.getWorkers().add(waiter1);
+        businessDemo.getWorkers().add(waiter2);
+
+        //Customers
+        Customer customer1 = new Customer("Robert");
+        Customer customer2 = new Customer("David");
+        Customer customer3 = new Customer("John");
+        Customer customer4 = new Customer("Michael");
+        Customer customer5 = new Customer("William");
+        Customer customer6 = new Customer("Richard");
+        Customer customer7 = new Customer("Joseph");
+        Customer customer8 = new Customer("Thomas");
+        Customer customer9 = new Customer("Charles");
+        Customer customer10 = new Customer("Christopher");
+        Customer customer11 = new Customer("Daniel");
+        Customer customer12 = new Customer("Matthew");
+        Customer customer13 = new Customer("Anthony");
+        Customer customer14 = new Customer("Mark");
+        Customer customer15 = new Customer("Donald");
+        Customer customer16 = new Customer("Steven");
+        Customer customer17 = new Customer("Paul");
+
+        //Timetable and events
+        Timetable timetable = new Timetable();
+
+
+        business.timetable.Event event = new business.timetable.Event(waiter, "Dishes", "Monday", "08-09", "8");
+        business.timetable.Event event1 = new business.timetable.Event(waiter1, "Phone orders", "Sunday", "11-12", "6");
+        business.timetable.Event event2 = new business.timetable.Event(waiter1, "Table orders", "Friday", "00-01", "8");
+        business.timetable.Event event3 = new business.timetable.Event(waiter2, "Cleaning", "Saturday", "11-12", "4");
+        business.timetable.Event event4 = new business.timetable.Event(waiter2, "Kitchen", "Tuesday", "00-01", "7");
+        business.timetable.Event event5 = new Event(waiter, "Phone orders", "Thursday", "11-12", "8");
+
+        timetable.createEvent(event);
+        timetable.createEvent(event1);
+        timetable.createEvent(event2);
+        timetable.createEvent(event3);
+        timetable.createEvent(event4);
+        timetable.createEvent(event5);
+        Objection objection = new Objection(event2, "I am unavailable after 4");
+        Objection objection1 = new Objection(event4, "I'll be there by 10:10");
+
+        timetable.getObjections().add(objection);
+        timetable.getObjections().add(objection1);
+
+        businessDemo.setTimetable(timetable);
+
+        Order order = new Order();
+        //Order order1 = new Order();
+        Order order2 = new Order();
+        Order order3 = new Order();
+        Order order4 = new Order();
+
+        Transaction transaction = new Transaction("Incoming", 58.67);
+        Transaction transaction1 = new Transaction("Outgoing", 538.67);
+        Transaction transaction2 = new Transaction("Outgoing", 158.32);
+        Transaction transaction3 = new Transaction("Incoming", 358.67);
+        Transaction transaction4 = new Transaction("Incoming", 584.44);
+        Transaction transaction5 = new Transaction("Outgoing", 586.67);
+        Transaction transaction6 = new Transaction("Incoming", 558.60);
+        Transaction transaction7 = new Transaction("Incoming", 258.67);
+        Transaction transaction8 = new Transaction("Outgoing", 58.45);
+        Transaction transaction9 = new Transaction("Incoming", 58.36);
+
+        businessDemo.getLogistics().getTransactions().add(transaction);
+        businessDemo.getLogistics().getTransactions().add(transaction1);
+        businessDemo.getLogistics().getTransactions().add(transaction2);
+        businessDemo.getLogistics().getTransactions().add(transaction3);
+        businessDemo.getLogistics().getTransactions().add(transaction4);
+        businessDemo.getLogistics().getTransactions().add(transaction5);
+        businessDemo.getLogistics().getTransactions().add(transaction6);
+        businessDemo.getLogistics().getTransactions().add(transaction7);
+        businessDemo.getLogistics().getTransactions().add(transaction8);
+        businessDemo.getLogistics().getTransactions().add(transaction9);
+
+
+
+
+
+        Subscription subscription =new Subscription(customer1,order,"Daily");
+        Subscription subscription1 =new Subscription(customer2,order2,"Daily");
+        Subscription subscription2 =new Subscription(customer3,order4,"Daily");
+
+        businessDemo.getSubscriptionList().add(subscription);
+        businessDemo.getSubscriptionList().add(subscription1);
+        businessDemo.getSubscriptionList().add(subscription2);
+
+
+
+
+        LocalDateTime dateTime = LocalDateTime.parse("2017-04-12T14:45:36");
+        LocalDateTime dateTime1 = LocalDateTime.parse("2008-09-05T08:12:24");
+        LocalDateTime dateTime2 = LocalDateTime.parse("2011-12-16T11:32:48");
+        LocalDateTime dateTime3 = LocalDateTime.parse("2004-06-20T23:50:52");
+        LocalDateTime dateTime4 = LocalDateTime.parse("2015-02-08T05:25:09");
+        LocalDateTime dateTime5 = LocalDateTime.parse("2001-11-03T15:30:43");
+        LocalDateTime dateTime6 = LocalDateTime.parse("2002-01-24T19:05:14");
+        LocalDateTime dateTime7 = LocalDateTime.parse("2013-07-27T06:41:37");
+
+        CheckInOutEvent checkInOutEvent = new CheckInOutEvent("CheckIn", dateTime);
+        CheckInOutEvent checkInOutEvent1 = new CheckInOutEvent("CheckIn", dateTime1);
+        CheckInOutEvent checkInOutEvent2 = new CheckInOutEvent("CheckOut", dateTime2);
+        CheckInOutEvent checkInOutEvent3 = new CheckInOutEvent("CheckIn", dateTime3);
+        CheckInOutEvent checkInOutEvent4 = new CheckInOutEvent("CheckOut", dateTime4);
+        CheckInOutEvent checkInOutEvent5 = new CheckInOutEvent("CheckIn", dateTime5);
+        CheckInOutEvent checkInOutEvent6 = new CheckInOutEvent("CheckOut", dateTime6);
+        CheckInOutEvent checkInOutEvent7 = new CheckInOutEvent("CheckIn", dateTime7);
+
+        waiter.getWorkerTimeLog().add(checkInOutEvent);
+        waiter1.getWorkerTimeLog().add(checkInOutEvent1);
+        waiter2.getWorkerTimeLog().add(checkInOutEvent2);
+        waiter.getWorkerTimeLog().add(checkInOutEvent);
+        waiter1.getWorkerTimeLog().add(checkInOutEvent3);
+        waiter.getWorkerTimeLog().add(checkInOutEvent4);
+        waiter1.getWorkerTimeLog().add(checkInOutEvent5);
+        waiter2.getWorkerTimeLog().add(checkInOutEvent6);
+        waiter.getWorkerTimeLog().add(checkInOutEvent7);
+        waiter2.getWorkerTimeLog().add(checkInOutEvent3);
+
+
+
+
+
+
+
+        Point location = new Point(0, 0);
+
+        Table tableA1 = new Table();
+        System.out.println(tableA1.getTableId());
+        Table tableA2 = new Table();
+        Table tableA3 = new Table();
+        Table tableA4 = new Table();
+        Table tableA5 = new Table();
+        Table tableA6 = new Table();
+        businessDemo.addTable(tableA1);
+        businessDemo.addTable(tableA6);
+
+        Dish dish1 = new Dish("Pizza");
+        Dish dish2 = new Dish("Burger");
+        Dish dish3 = new Dish("Salad");
+        dish1.setPrice(9);
+        dish2.setPrice(8);
+        dish3.setPrice(7);
+        // Create some orders
+        Order order1 = new Order();
+        order1.setTableId(tableA1.getTableId());
+        order1.addToOrder(dish1);
+        order1.addToOrder(dish2);
+        businessDemo.addOrder(order1);
+        businessDemo.getOrderHistory().addOrder(order1);
+
+
+        //Reservation reservation1 = new Reservation(businessDemo, customer1.getID(), "2024-05-11", "15:00", 8, 6,tableA1.getTableId());
+        //businessDemo.addReservation(reservation1);
+
+
+
+
         new MainUI();
+
+
     }
+
+
 
 }

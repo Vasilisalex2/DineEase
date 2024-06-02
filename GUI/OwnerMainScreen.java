@@ -63,14 +63,8 @@ public class OwnerMainScreen extends JFrame {
     Business business;
 
     public OwnerMainScreen(Business business) {
-
-        //JFrame frame = new JFrame("OwnerMainScreen");
         setSize(800, 600);
-
         setTitle("OwnerMainScreen");
-        //setContentPane(new OwnerMainScreen().mainPanel);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //pack();
         setVisible(true);
         setContentPane(mainPanel);
 
@@ -95,8 +89,6 @@ public class OwnerMainScreen extends JFrame {
 
     }
 
-    //TODO add objections table
-    //TODO what to do with order stats
 
     //****************************
     //TIMETABLE METHODS
@@ -366,7 +358,6 @@ public class OwnerMainScreen extends JFrame {
 
                 populateTransactionsTable();
 
-                // Perform any additional operations with the transaction
                 System.out.println("Transaction created: " +
                         transaction.getTransactionType() + "," + transaction.getAmount());
             }
@@ -411,8 +402,8 @@ public class OwnerMainScreen extends JFrame {
     }
 
     class ButtonEditorWorkerTask extends AbstractCellEditor implements TableCellEditor, ActionListener {
-        private JTable table;
-        private JButton button;
+        private final JTable table;
+        private final JButton button;
         private Worker worker;
 
         public ButtonEditorWorkerTask(JTable table) {
@@ -465,22 +456,6 @@ public class OwnerMainScreen extends JFrame {
         subscriptionsTable.getColumn("Delete").setCellRenderer(new SubDeleteButton());
         subscriptionsTable.getColumn("Delete").setCellEditor(new SubDeleteButtonEditor(subscriptionsTable, business.getSubscriptionList()));
 
-//        //PREVIEW CODE
-//        String[] columnNames = {"Full Name", "OrderID", "Frequency", "Delete"};
-//
-//        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
-//
-//        // create a row to repeat
-//        String randomFullName = "John Jack";
-//        String frequency = "Weekly";
-//
-//
-//        for (int i = 0; i < 30; i++) {
-//            model.addRow(new Object[]{randomFullName, String.valueOf(i), frequency});
-//        }
-//
-//        subscriptionsTable.setModel(model);
-//        subscriptionsTable.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer("Delete"));
     }
 
 
@@ -501,10 +476,10 @@ public class OwnerMainScreen extends JFrame {
 
     //class to create event listeners for subscription deletion buttons
     class SubDeleteButtonEditor extends AbstractCellEditor implements TableCellEditor, ActionListener {
-        private JButton button;
+        private final JButton button;
         private int row;
-        private JTable table;
-        private ArrayList<Subscription> subscriptionList;
+        private final JTable table;
+        private final ArrayList<Subscription> subscriptionList;
 
         public SubDeleteButtonEditor(JTable table, ArrayList<Subscription> subscriptionList) {
             this.table = table;
