@@ -20,6 +20,7 @@ class MainUI extends JFrame {
 
         DineEase app = new DineEase();
         Business business = app.getBusinesses().get(0);
+        business.setDescription("A new restaurant in town open for the bold. Who will dare to taste our creations? ");
 
         business.addReview(new StoreRating("Vasilis","I didnt like the store. I voted against it!"));
         business.addReview(new StoreRating("Nikos","Such a fantastic experience. This was not just dinner, but an experience and show of art. Every dish was an experience. We waited with anticipation for each. It was worth it.\n" +

@@ -60,7 +60,9 @@ public class Business {
         this.orderHistory = new OrderHistory();
         this.clientStatistics = new ClientStatistics();
         for(int i =0; i<40; ++i){
-            menu.addToMenu(new Dish("Μακαρονια με κιμα χωρις κιμα" + i));
+            Dish dish = new Dish("Μακαρονια με κιμα χωρις κιμα" + i);
+            dish.setDescription("Μια παραδοσιακη συνταγη δυσκολης υλοποιησης. Περιεχει τοπικα και βιολογικα υλικα οπως ο κιμας και δεν περιεχει υλικα οπως αυτο.");
+            menu.addToMenu(dish);
         }
         for(int i =0; i<10; ++i){
             tables.add(new Table());
