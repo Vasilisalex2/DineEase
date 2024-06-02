@@ -245,12 +245,12 @@ class MainUI extends JFrame {
             Cook worker = new Cook("Name");//todo add a name
             worker.setBusiness(businessDemo);
 
-//            Order order = new Order();
-//            Dish dish = new Dish("Παπια με τηγανητο ρυζι");
-//            dish.setQuantity(10);
-//            order.addToOrder(dish);
-//            order.addToOrder(new Dish("Παγωτο Βανιλια"));
-//            worker.addToTaskList(order);
+           Order orderT = new Order();
+            Dish dish = new Dish("Παπια με τηγανητο ρυζι");
+            dish.setQuantity(10);
+            orderT.addToOrder(dish);
+            orderT.addToOrder(new Dish("Παγωτο Βανιλια"));
+            worker.addToTaskList(orderT);
 
             new DashboardUI(worker,worker.getBusiness(),app,new Point(200,100));
             dispose();
@@ -284,13 +284,7 @@ class MainUI extends JFrame {
 public class Main {
 
     public static void main(String[] args) {
-
-
-
-
         new MainUI();
-
-
     }
 
 
