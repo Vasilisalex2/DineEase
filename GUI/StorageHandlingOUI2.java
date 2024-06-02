@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class StorageHandlingOUI2 extends JPanel {
     private JPanel topPanel;
 
-    public StorageHandlingOUI2(Owner user, Business business) {
+    public StorageHandlingOUI2(Business business) {
 
 
         setSize(400, 680);
@@ -64,11 +64,9 @@ public class StorageHandlingOUI2 extends JPanel {
         JScrollPane scrollPane = new JScrollPane(table);
         topPanel.add(scrollPane, BorderLayout.CENTER);
 
-        ArrayList<Item> storage = business.getStorage().getStorage();
+        ArrayList<Item> storage = business.getStorage().getLowItems();
         for (Item item : storage) {
-            if(item.getLowerLimit()>item.getQuantity()) {
-                tableModel.addRow(new Object[]{item.getName(), item.getQuantity()});
-            }
+            tableModel.addRow(new Object[]{item.getName(), item.getQuantity()});
         }
         topPanel.revalidate();
         topPanel.repaint();

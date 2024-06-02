@@ -188,7 +188,7 @@ public class BusinessUI extends JFrame{
 
 
         reviewsButton.addActionListener(e -> {
-            new ReviewsUI(user,business);
+            new ReviewsUI(user,business,this.getLocation());
             dispose();
         });
 

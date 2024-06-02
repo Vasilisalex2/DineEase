@@ -11,9 +11,10 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class ReviewsUI extends JFrame {
-    public ReviewsUI(Customer user, Business business){
+    public ReviewsUI(Customer user, Business business,Point location){
         setTitle("Reviews UI");
         setSize(460,680);
+        setLocation(location);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 

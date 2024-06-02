@@ -82,7 +82,6 @@ public class BasketUI extends JFrame{
 
 // Create orders for each group of dishes with the same table ID
                     for (Map.Entry<Integer, ArrayList<Dish>> entry : dishesByTable.entrySet()) {
-                        int tableId = entry.getKey();
                         ArrayList<Dish> dishesForTable = entry.getValue();
 
                         Order order = new Order();

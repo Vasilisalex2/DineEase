@@ -21,9 +21,6 @@ public class TaskList {
     public ArrayList<Task> getTasks() {
         return tasks;
     }
-    public void setTasks(ArrayList<Task> tasks) {
-        this.tasks = tasks;
-    }
     public void addTask(Task task) {
         this.tasks.add(task);
     }

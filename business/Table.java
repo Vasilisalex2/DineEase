@@ -2,6 +2,8 @@ package business;
 
 import users.Customer;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 /**
@@ -36,6 +38,7 @@ public class Table {
         this.tableId = lastTableID++;
         this.status = eStatus.FREE;
         this.occupiedBy = "";
+        this.reservations = new ArrayList<>();
     }
     public void setCustomer(Customer customer) {
         this.customer = customer;
@@ -53,7 +56,34 @@ public class Table {
         return reservations;
     }
     public void addReservation(Reservation reservation) {
-        this.reservations.add(reservation);
+        reservations = getReservations();
+        boolean overlap = false;
+        if (reservations != null) {
+            for (Reservation r : reservations) {
+                if (r.getDate().isEqual(reservation.getDate())) {
+                    if (reservation.getStartTime().isBefore(r.getEndTime()) && reservation.getEndTime().isAfter(r.getStartTime())) {
+                        overlap = true;
+                        break; // Exit the loop early since overlap is already true
+                    }
+                }
+            }
+        }
+        // Check if the end time is after the start time
+        if (reservation.getEndTime().isBefore(reservation.getStartTime())) {
+            overlap = true;
+        }
+        // Check if the reservation date and time are after the current date and time
+        if (reservation.getDate().isBefore(LocalDate.now()) ||
+                (reservation.getDate().isEqual(LocalDate.now()) && reservation.getStartTime().isBefore(LocalTime.now()))) {
+            overlap = true;
+        }
+        if(!overlap){
+            reservations.add(reservation);
+            System.out.println("Added");
+        }
+        else{
+            System.out.println("Not Added");
+        }
     }
 
     public int getCapacity() {
@@ -69,6 +99,9 @@ public class Table {
         if (status == eStatus.FREE) {
             status = eStatus.RESERVED;
         }
+    }
+    public void removeReservation(Reservation reservation) {
+        reservations.remove(reservation);
     }
 
     public void freeTable() {

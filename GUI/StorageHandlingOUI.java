@@ -43,13 +43,13 @@ public class StorageHandlingOUI extends JFrame{
 
         storageMenuItem.addActionListener(e -> {
             topPanel.removeAll();
-            topPanel.add(new StorageHandlingOUI1(user, business));
+            topPanel.add(new StorageHandlingOUI1(business));
             revalidate();
             repaint();
         });
         lowStorageMenuItem.addActionListener(e -> {
             topPanel.removeAll();
-            topPanel.add(new StorageHandlingOUI2(user, business));
+            topPanel.add(new StorageHandlingOUI2(business));
             revalidate();
             repaint();
         });

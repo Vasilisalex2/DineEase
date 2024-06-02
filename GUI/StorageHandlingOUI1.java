@@ -2,7 +2,6 @@ package GUI;
 
 import business.Business;
 import business.ordering.Item;
-import users.Owner;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,10 +10,7 @@ import java.util.ArrayList;
 public class StorageHandlingOUI1 extends JPanel {
     private JPanel topPanel;
 
-    public StorageHandlingOUI1(Owner user, Business business) {
-
-        // show storage and have buttons for each item;
-        //setSize(460, 680);
+    public StorageHandlingOUI1( Business business) {
         setLayout(new BorderLayout());
 
 
@@ -112,27 +108,6 @@ public class StorageHandlingOUI1 extends JPanel {
 
         JPanel rightPanel = new JPanel();
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.X_AXIS));
-
-        //Dimension buttonSize = new Dimension(70, 50);
-        //Dimension inputSize = new Dimension(70, 5);
-        //quantButton.setPreferredSize(buttonSize);
-        //lowerButton.setPreferredSize(buttonSize);
-        //higherButton.setPreferredSize(buttonSize);
-        //removeButton.setPreferredSize(buttonSize);
-
-        //quantButton.setFont(new Font(quantButton.getFont().getName(), Font.PLAIN, 9));
-        //lowerButton.setFont(new Font(lowerButton.getFont().getName(), Font.PLAIN, 9));
-        //higherButton.setFont(new Font(higherButton.getFont().getName(), Font.PLAIN, 9));
-        //removeButton.setFont(new Font(removeButton.getFont().getName(), Font.PLAIN, 9));
-
-        //inputQuantity.setPreferredSize(inputSize);
-        //inputLower.setPreferredSize(inputSize);
-        //inputHigher.setPreferredSize(inputSize);
-
-        //inputQuantity.setFont(new Font(inputQuantity.getFont().getName(), Font.PLAIN, 9));
-        //inputLower.setFont(new Font(inputLower.getFont().getName(), Font.PLAIN, 9));
-        //inputHigher.setFont(new Font(inputHigher.getFont().getName(), Font.PLAIN, 9));
-
 
         rightPanel.add(inputQuantity);
         rightPanel.add(quantButton);
