@@ -45,10 +45,6 @@ public class BasketUI extends JFrame{
                     if(((Customer) user).isCheckedIN()){
                         Basket basket = user.getBasket();
                         Order order = new Order();
-                        //for (Dish dish : basket.getBasket()) {
-                         //   order.addToOrder(dish);
-                          //  basket.getBasket().remove(dish);
-                        //}
                         order.createOrder(basket.getBasket());
                         basket.clearBasket();
                         business.addToTaskList(order);
