@@ -1,5 +1,6 @@
 package users;
 
+import business.Business;
 import business.Task;
 import business.TaskList;
 import business.management.CheckInOutEvent;
@@ -18,12 +19,19 @@ public class Worker extends Person {
     private TaskList taskList;
     private LocalDateTime checkInTime;
     private LocalDateTime checkOutTime;
+    private Business business;
 
     public Worker (String fullName){
         super(fullName);
         this.taskList = new TaskList();
         this.workerTimeLog = new ArrayList<>();
 
+    }
+    public Business getBusiness() {
+        return business;
+    }
+    public void setBusiness(Business business) {
+        this.business = business;
     }
 
     @Override

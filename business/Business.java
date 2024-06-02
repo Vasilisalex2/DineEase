@@ -5,6 +5,7 @@ import business.management.OrderStatistics;
 import business.management.Storage;
 import business.ordering.*;
 import business.timetable.Timetable;
+import business.Table;
 import users.Worker;
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class Business {
         this.orders = new ArrayList<>();
         this.reviews = new ArrayList<StoreRating>();
         this.storage = new Storage();
-        this.name = "TEST";
+        this.name = "Name Of Business";
         this.menu = new Menu();
         this.id = id;
         this.taskList = new TaskList();
@@ -58,15 +59,12 @@ public class Business {
         this.orderStatistics = new OrderStatistics();
         this.orderHistory = new OrderHistory();
         this.clientStatistics = new ClientStatistics();
-        for(int i =0; i<100; ++i){
-            menu.addToMenu(new Dish("Ok" + i));
+        for(int i =0; i<40; ++i){
+            menu.addToMenu(new Dish("Μακαρονια με κιμα χωρις κιμα" + i));
         }
         for(int i =0; i<10; ++i){
             tables.add(new Table());
         }
-        menu.addToMenu(new Dish("A"));
-        menu.addToMenu(new Dish("B"));
-        menu.addToMenu(new Dish("C"));
     }
     public int getID(){
         return id;

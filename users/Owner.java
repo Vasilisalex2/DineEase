@@ -1,5 +1,7 @@
 package users;
 
+import business.Business;
+
 /**
  * brief description of the class.
  *
@@ -12,8 +14,16 @@ package users;
 
 public class Owner extends Person {
 
+    private Business business;
     public Owner(String fullName) {
         super(fullName);
+    }
+
+    public Business getBusiness() {
+        return business;
+    }
+    public void setBusiness(Business business) {
+        this.business = business;
     }
   
 }

@@ -18,7 +18,7 @@ public class Item {
     public Item(){
         this.quantity = 10;
         this.lowerLimit = 20;
-        this.name = "FAFADSDASDA";
+        this.name = "Σακουλα 40 Κιλων Αλευρι για ζυμη που φουσκωνει";
 
     }
     public void setQuantity(int newQuantity){

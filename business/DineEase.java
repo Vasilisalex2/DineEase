@@ -24,7 +24,7 @@ public class DineEase {
 
         Business test = new Business(10);
         businesses.add(test);
-        for(int i =0; i < 30; i++){
+        for(int i =0; i < 10; i++){
             businesses.add(new Business(i));
         }
     }
