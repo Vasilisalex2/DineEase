@@ -12,7 +12,7 @@ package business;
 
 public class GeneralTask extends Task {
     private taskType type;
-    private Table table;
+    public Table table;
     private String description;
     public enum taskType{
         tableCall,
@@ -21,8 +21,9 @@ public class GeneralTask extends Task {
     public GeneralTask(String description, taskType type){
         this.description = description;
         this.type = type;
+        this.table= table ;
         if(type == taskType.tableCall){
-            description = description + " from table : " + Integer.toString(table.getTableId());
+            description = description + " from table : " + (this.table.getTableId());
         }
     }
 

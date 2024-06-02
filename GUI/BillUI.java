@@ -8,8 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
-import static business.DineEase.findBusinessByName;
-
 
 public class BillUI extends JFrame {
     private JPanel BillUI;
@@ -24,7 +22,7 @@ public class BillUI extends JFrame {
 
     public BillUI(String billDetails, int tableId, Business business, String userRole) {
         setTitle("Bill UI");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+     //   setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 300);
         setLocationRelativeTo(null);
         setContentPane(BillUI);
@@ -54,13 +52,13 @@ public class BillUI extends JFrame {
         callWaiterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                createWaiterTask(tableId);
+                createWaiterTask(tableId, business);
             }
         });
         removeBillButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                removeBill(tableId);
+                removeBill(tableId, business);
             }
         });
     }
@@ -69,9 +67,11 @@ public class BillUI extends JFrame {
         BillInformation.setText(billDetails);
     }
 
-    private void createWaiterTask(int tableId) {
-        Business Business = findBusinessByName("BusinessName1");
-        Table table = Business.getTable1(tableId);
+    private void createWaiterTask(int tableId, Business business) {
+     this.business = business;
+     this.tableId = tableId;
+        Table table = business.getTable1(tableId);
+        System.out.println(table); // Print the task details
         String description = "Waiter in table " + tableId;
         Date currentTime = new Date(); // Current date and time
         GeneralTask generalTask = new GeneralTask(description, GeneralTask.taskType.tableCall);
@@ -79,7 +79,7 @@ public class BillUI extends JFrame {
         System.out.println("New Task created: " + generalTask); // Print the task details
     }
 
-    private void removeBill(int tableId) {
+    private void removeBill(int tableId, Business business) {
 
 
         business.ordering.Bill billToRemove = business.getBill(tableId);

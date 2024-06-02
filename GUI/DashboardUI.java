@@ -18,7 +18,7 @@ public class DashboardUI extends JFrame {
         setTitle("Dashboard");
         setSize(460, 680);
         setLocation(location);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      //  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         JButton storageButton = new JButton("Storage");
         storageButton.setBounds(155, 80, 150, 30);

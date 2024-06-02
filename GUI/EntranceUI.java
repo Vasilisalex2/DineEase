@@ -27,7 +27,7 @@ public class EntranceUI extends JFrame {
 
     public EntranceUI(Business business) {
         setTitle("EntranceUI");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(300, 200);
         setVisible(true);
         setLocationRelativeTo(null);

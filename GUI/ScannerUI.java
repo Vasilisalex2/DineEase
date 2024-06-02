@@ -1,3 +1,8 @@
+
+// κανονικά ο πελάτης κανει scan το qr και απο εκει λαμβάνει η εφαρμογή το table id προς το παρών επειδη ειναι bate
+// το εισάγει χειροκίνητα ο χρήστης για να ελεφ
+
+
 package GUI;
 
 import business.Business;
@@ -18,7 +23,7 @@ public class ScannerUI extends JFrame {
 
     public ScannerUI() {
         setTitle("Scanner UI");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(300, 200);
         setVisible(true);
         setLocationRelativeTo(null);

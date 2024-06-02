@@ -19,7 +19,7 @@ public class ScannerWorkerUI extends JFrame {
 
     public ScannerWorkerUI(Worker worker) {
         setTitle("ScannerWorkerUI");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(300, 200);
         setVisible(true);
         setLocationRelativeTo(null);

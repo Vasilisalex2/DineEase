@@ -17,8 +17,8 @@ public class BusinessUI extends JFrame{
         setTitle(business.getName() + "UI");
         setSize(460,680);
         setLocation(location);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+       // setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        System.out.println(business.getName());
         setLayout(new BorderLayout());
 
         JPanel contentPanel = new JPanel();
@@ -122,7 +122,7 @@ public class BusinessUI extends JFrame{
         scanButton.addActionListener(e -> {
 
             int customerId = user.getID();
-            Reservation reservationFound = DineEase.reservationCheck(customerId);
+            Reservation reservationFound = business.reservationCheck(customerId);
             if (reservationFound != null) {
                 // A reservation is found for the customer, open the CheckInUI
                 CheckInUI checkInUI = new CheckInUI(user, business,app,location);

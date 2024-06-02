@@ -14,7 +14,7 @@ public class PaymentUI extends JFrame {
 
     public PaymentUI() {
         setTitle("Payment");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 300);
         setLocationRelativeTo(null);
         setContentPane(PaymentUI);

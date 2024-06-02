@@ -18,7 +18,7 @@ public class CurBillUI extends JFrame {
     public CurBillUI(Business  business) {
 
         setTitle("CurBill UI");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      //  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(300, 200);
         setVisible(true);
         setLocationRelativeTo(null);

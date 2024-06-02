@@ -19,7 +19,7 @@ public class CheckInUI extends JFrame {
     public CheckInUI(Customer user, Business business, DineEase app, Point location) {
 
         setTitle("CheckIn UI");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(300, 200);
         setVisible(true);
         setLocationRelativeTo(null);

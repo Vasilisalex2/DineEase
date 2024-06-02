@@ -15,7 +15,7 @@ public class DashbooardUI extends JFrame {
 
     public DashbooardUI(Business business) {
         setTitle("DashboardUI UI");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(300, 200);
         setVisible(true);
         setLocationRelativeTo(null);
