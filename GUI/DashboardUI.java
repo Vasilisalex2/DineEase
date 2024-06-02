@@ -131,6 +131,17 @@ public class DashboardUI extends JFrame {
             });
             add(breakButton);
         }
+        else {
+            JButton ownerButton = new JButton("Business Handling");
+            ownerButton.setBounds(155, 180, 150, 30);
+            ownerButton.setBackground(Color.BLUE);
+            ownerButton.setForeground(Color.WHITE);
+            ownerButton.addActionListener(e -> {
+                new OwnerMainScreen(business);
+            });
+            add(ownerButton);
+
+        }
 
         setVisible(true);
     }
