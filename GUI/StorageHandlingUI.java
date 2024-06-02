@@ -1,6 +1,7 @@
 package GUI;
 
 import business.Business;
+import business.DineEase;
 import business.ordering.Item;
 import users.Cook;
 import users.Person;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 
 public class StorageHandlingUI extends JFrame {
     private JPanel topPanel;
-    public StorageHandlingUI(Person user, Business business,Point location) {
+    public StorageHandlingUI(Person user, Business business, DineEase app, Point location) {
         //new JFrame("StorageHandling");
         setTitle("Storage Handling");
         setSize(460,680);
@@ -34,7 +35,7 @@ public class StorageHandlingUI extends JFrame {
 
         //Button Order
         button.addActionListener(e -> {
-            new DashboardUI(user, business,this.getLocation());
+            new DashboardUI(user, business,app,this.getLocation());
             dispose();
         });
 

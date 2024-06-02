@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TasksUI extends JFrame {
-    public TasksUI(Worker user, Business business,Point location) {
+    public TasksUI(Worker user, Business business,DineEase app,Point location) {
         setTitle("TasksUI");
         setSize(460,680);
         setLocation(location);
@@ -31,7 +31,7 @@ public class TasksUI extends JFrame {
         JButton button = new JButton("Back");
         button.setPreferredSize(new Dimension(100, 30));
         button.addActionListener(e->{
-            new DashboardUI(user,business,this.getLocation());
+            new DashboardUI(user,business,app,this.getLocation());
             popup.dispose();
             dispose();
         });

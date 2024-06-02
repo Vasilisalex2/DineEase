@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import business.DineEase;
 import users.Customer;
 
 public class CheckInUI extends JFrame {
@@ -15,7 +16,7 @@ public class CheckInUI extends JFrame {
     private JButton cancelButton;
     private JButton continueButton;
 
-    public CheckInUI(Customer user, Business business, Point location) {
+    public CheckInUI(Customer user, Business business, DineEase app, Point location) {
 
         setTitle("CheckIn UI");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,7 +35,7 @@ public class CheckInUI extends JFrame {
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                BusinessUI dashboardUI = new BusinessUI(user, business, location);
+                BusinessUI dashboardUI = new BusinessUI(user, business, app, location);
                 dispose();
             }
         });

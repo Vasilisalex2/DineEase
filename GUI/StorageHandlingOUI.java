@@ -1,13 +1,14 @@
 package GUI;
 
 import business.Business;
+import business.DineEase;
 import users.Owner;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class StorageHandlingOUI extends JFrame{
-    public StorageHandlingOUI(Owner user, Business business, Point location) {
+    public StorageHandlingOUI(Owner user, Business business, DineEase app, Point location) {
         setTitle("Storage Handling");
         setSize(460, 680);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,7 +37,7 @@ public class StorageHandlingOUI extends JFrame{
         button.setBackground(Color.BLUE);
         button.setForeground(Color.WHITE);
         button.addActionListener(e -> {
-            new DashboardUI(user, business,this.getLocation());
+            new DashboardUI(user, business,app,this.getLocation());
             dispose();
         });
         bottomPanel.add(button);

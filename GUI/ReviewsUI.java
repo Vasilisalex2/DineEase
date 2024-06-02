@@ -1,6 +1,7 @@
 package GUI;
 
 import business.Business;
+import business.DineEase;
 import business.StoreRating;
 import users.Customer;
 
@@ -9,7 +10,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class ReviewsUI extends JFrame {
-    public ReviewsUI(Customer user, Business business,Point location){
+    public ReviewsUI(Customer user, Business business, DineEase app, Point location){
         setTitle("Reviews UI");
         setSize(460,680);
         setLocation(location);
@@ -44,7 +45,7 @@ public class ReviewsUI extends JFrame {
         JButton backButton = new JButton("Back");
         backButton.setPreferredSize(new Dimension(100, 30));
         backButton.addActionListener(e -> {
-            new BusinessUI(user, business,this.getLocation());
+            new BusinessUI(user, business,app,this.getLocation());
             dispose();
         });
 

@@ -10,10 +10,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class BusinessUI extends JFrame{
-    private JTextField customerNameField;
-    private JScrollBar scrollBar;
+    private DineEase app;
 
-    public BusinessUI(Customer user,Business business,Point location){
+    public BusinessUI(Customer user,Business business, DineEase dineEase,Point location){
+        app = dineEase;
         setTitle(business.getName() + "UI");
         setSize(460,680);
         setLocation(location);
@@ -50,7 +50,7 @@ public class BusinessUI extends JFrame{
         menuButton.setForeground(Color.WHITE);
 
         menuButton.addActionListener(e -> {
-                new MenuUI(user,business, business.getMenu(),this.getLocation());
+                new MenuUI(user,business, business.getMenu(),app,this.getLocation());
                 dispose();
         });
 
@@ -61,7 +61,7 @@ public class BusinessUI extends JFrame{
         resButton.setForeground(Color.WHITE);
 
         resButton.addActionListener(e -> {
-            new ReservationUI(user,business,this.getLocation());
+            new ReservationUI(user,business,app,this.getLocation());
             dispose();
         });
 
@@ -72,7 +72,7 @@ public class BusinessUI extends JFrame{
         sugButton.setForeground(Color.WHITE);
 
         sugButton.addActionListener(e -> {
-            new SuggestionsUI(user,business,this.getLocation());
+            new SuggestionsUI(user,business,app,this.getLocation());
             dispose();
         });
 
@@ -90,6 +90,16 @@ public class BusinessUI extends JFrame{
         checkOutButton.setBackground(Color.BLUE);
         checkOutButton.setForeground(Color.WHITE);
 
+        JButton backButton = new JButton("Back");
+        backButton.setPreferredSize(new Dimension(100, 100));
+        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        backButton.setBackground(Color.BLUE);
+        backButton.setForeground(Color.WHITE);
+        backButton.addActionListener(e -> {
+            new BusinessesUI(user,app,this.getLocation());
+            dispose();
+        });
+
 
         bottomPanel.add(Box.createVerticalStrut(60));
         bottomPanel.add(menuButton);
@@ -101,6 +111,9 @@ public class BusinessUI extends JFrame{
         bottomPanel.add(checkOutButton);
         bottomPanel.add(Box.createVerticalStrut(30));
         bottomPanel.add(scanButton);
+        bottomPanel.add(Box.createVerticalStrut(30));
+        bottomPanel.add(backButton);
+
 
 
 
@@ -112,7 +125,7 @@ public class BusinessUI extends JFrame{
             Reservation reservationFound = DineEase.reservationCheck(customerId);
             if (reservationFound != null) {
                 // A reservation is found for the customer, open the CheckInUI
-                CheckInUI checkInUI = new CheckInUI(user, business,location);
+                CheckInUI checkInUI = new CheckInUI(user, business,app,location);
                 // You can pass the reservation object to the CheckInUI constructor if needed
                 String Details = reservationFound.showCheckIn();
                 checkInUI.setReservationDetails(Details);
@@ -184,7 +197,7 @@ public class BusinessUI extends JFrame{
 
 
         reviewsButton.addActionListener(e -> {
-            new ReviewsUI(user,business,this.getLocation());
+            new ReviewsUI(user,business,app,this.getLocation());
             dispose();
         });
 

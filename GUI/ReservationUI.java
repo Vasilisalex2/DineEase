@@ -1,6 +1,7 @@
 package GUI;
 
 import business.Business;
+import business.DineEase;
 import business.Reservation;
 import business.Table;
 import users.Customer;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class ReservationUI extends JFrame {
-    public ReservationUI(Person user, Business business,Point location) {
+    public ReservationUI(Person user, Business business, DineEase app, Point location) {
         JDialog popup = new JDialog();
 
         setTitle("Reservation UI");
@@ -39,10 +40,10 @@ public class ReservationUI extends JFrame {
         button.setPreferredSize(new Dimension(100, 30));
         button.addActionListener(e -> {
             if (user instanceof Customer) {
-                new BusinessUI((Customer) user, business,this.getLocation());
+                new BusinessUI((Customer) user, business,app,this.getLocation());
                 popup.dispose();
             } else {
-                new DashboardUI(user, business,this.getLocation());
+                new DashboardUI(user, business,app,this.getLocation());
                 popup.dispose();
             }
             dispose();

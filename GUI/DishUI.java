@@ -1,6 +1,7 @@
 package GUI;
 
 import business.Business;
+import business.DineEase;
 import business.ordering.Dish;
 import users.Person;
 import users.Worker;
@@ -9,7 +10,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class DishUI extends JFrame {
-    public DishUI(Person user, Business business, Dish dish, Point location) {
+    private DineEase app;
+    public DishUI(Person user, Business business, Dish dish, DineEase dineEase,Point location) {
+        app = dineEase;
         setTitle("Dish UI - " + dish.getName());
         setSize(460, 680);
         setLocation(location);
@@ -62,7 +65,7 @@ public class DishUI extends JFrame {
         backButton.setBackground(Color.BLUE);
         backButton.setForeground(Color.WHITE);
         backButton.addActionListener(e -> {
-            new MenuUI(user,business,business.getMenu(),this.getLocation());
+            new MenuUI(user,business,business.getMenu(),app,this.getLocation());
             dispose();
         });
 
@@ -78,7 +81,7 @@ public class DishUI extends JFrame {
                 // Add to basket
                 user.getBasket().addToBasket(dish, quantity);
                 // Navigate back to menu
-                new MenuUI(user, business, business.getMenu(), this.getLocation());
+                new MenuUI(user, business, business.getMenu(),app, this.getLocation());
                 dispose();
             } else {
                 System.err.println("Invalid input for quantity: " + quantityText);

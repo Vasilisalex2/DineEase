@@ -1,6 +1,7 @@
 package GUI;
 
 import business.Business;
+import business.DineEase;
 import business.GeneralTask;
 import business.ordering.Dish;
 import business.ordering.Menu;
@@ -14,9 +15,11 @@ import java.util.ArrayList;
 
 public class MenuUI extends JFrame {
     private boolean butDisable;
+    private DineEase app;
 
-    public MenuUI(Person user, Business business, Menu menu, Point location) {
+    public MenuUI(Person user, Business business, Menu menu,DineEase dineEase, Point location) {
         butDisable = false;
+        app = dineEase;
         setTitle("Menu");
         setSize(460, 680);
         setLocation(location);
@@ -49,7 +52,7 @@ public class MenuUI extends JFrame {
         dishButton.setBackground(Color.BLUE);
         dishButton.setForeground(Color.WHITE);
         dishButton.addActionListener((ActionEvent e) -> {
-            new DishUI(user, business, dish, this.getLocation());
+            new DishUI(user, business, dish, app,this.getLocation());
             dispose();
         });
 
@@ -66,10 +69,10 @@ public class MenuUI extends JFrame {
         backButton.setForeground(Color.WHITE);
         backButton.addActionListener(e -> {
             if(user instanceof Customer) {
-                new BusinessUI((Customer) user,business,this.getLocation());
+                new BusinessUI((Customer) user,business, app,this.getLocation());
             }
             else{
-                new DashboardUI(user,business,this.getLocation());
+                new DashboardUI(user,business,app,this.getLocation());
             }
             dispose();
         });
@@ -77,7 +80,7 @@ public class MenuUI extends JFrame {
         butBasket.setBackground(Color.BLUE);
         butBasket.setForeground(Color.WHITE);
         butBasket.addActionListener(e -> {
-            new BasketUI(user, business,this.getLocation());
+            new BasketUI(user, business,app,this.getLocation());
             dispose();
         });
         JButton butWaiter = new JButton("Call Waiter");

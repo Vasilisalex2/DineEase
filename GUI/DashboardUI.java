@@ -1,6 +1,7 @@
 package GUI;
 
 import business.Business;
+import business.DineEase;
 import business.timetable.TimerUI;
 import users.Owner;
 import users.Worker;
@@ -13,7 +14,7 @@ import java.awt.event.ActionListener;
 
 public class DashboardUI extends JFrame {
 
-    public DashboardUI(Person user, Business business, Point location) {
+    public DashboardUI(Person user, Business business, DineEase app, Point location) {
         setTitle("Dashboard");
         setSize(460, 680);
         setLocation(location);
@@ -39,23 +40,23 @@ public class DashboardUI extends JFrame {
 
         storageButton.addActionListener(e -> {
             if (user instanceof Owner) {
-                new StorageHandlingOUI((Owner) user, business, this.getLocation());
+                new StorageHandlingOUI((Owner) user, business, app,this.getLocation());
                 dispose();
             } else {
-                new StorageHandlingUI((Worker) user, business, this.getLocation());
+                new StorageHandlingUI((Worker) user, business,app, this.getLocation());
                 dispose();
             }
         });
         menuButton.addActionListener(e -> {
-            new MenuUI(user, business, business.getMenu(), this.getLocation());
+            new MenuUI(user, business, business.getMenu(),app, this.getLocation());
             dispose();
         });
         resButton.addActionListener(e -> {
-            new ReservationUI(user, business, this.getLocation());
+            new ReservationUI(user, business,app, this.getLocation());
             dispose();
         });
         taskButton.addActionListener(e -> {
-            new TasksUI((Worker) user, business, this.getLocation());
+            new TasksUI((Worker) user, business, app,this.getLocation());
             dispose();
         });
 

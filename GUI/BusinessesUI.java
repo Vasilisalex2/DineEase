@@ -10,7 +10,9 @@ import java.util.ArrayList;
 
 public class BusinessesUI extends JFrame {
     private JPanel topPanel;
-    public BusinessesUI(Customer user, DineEase dinease, Point location){
+    private DineEase app;
+    public BusinessesUI(Customer user, DineEase dineEase, Point location){
+        app = dineEase;
         setSize(460, 680);
         setLocation(location);
         setLayout(new BorderLayout());
@@ -19,7 +21,7 @@ public class BusinessesUI extends JFrame {
         // Top panel for dish names and buttons
         topPanel = new JPanel();
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
-        loadPanel(user,dinease.getBusinesses());
+        loadPanel(user,app.getBusinesses());
 
         JScrollPane scrollPane = new JScrollPane(topPanel);
         add(scrollPane, BorderLayout.CENTER);
@@ -46,7 +48,7 @@ public class BusinessesUI extends JFrame {
         button.setForeground(Color.WHITE);
 
         button.addActionListener(e->{
-            new BusinessUI(user,business,this.getLocation());
+            new BusinessUI(user,business,app,this.getLocation());
             dispose();
         });
 

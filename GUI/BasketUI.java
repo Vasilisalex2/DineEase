@@ -1,6 +1,7 @@
 package GUI;
 
 import business.Business;
+import business.DineEase;
 import business.ordering.Dish;
 import business.ordering.Order;
 import users.Basket;
@@ -16,7 +17,7 @@ import java.util.Map;
 
 public class BasketUI extends JFrame{
     private JPanel topPanel;
-    public BasketUI(Person user, Business business,Point location){
+    public BasketUI(Person user, Business business, DineEase app, Point location){
         setTitle("Basket");
         setSize(460, 680);
         setLocation(location);
@@ -32,7 +33,7 @@ public class BasketUI extends JFrame{
         backButton.setBackground(Color.BLUE);
         backButton.setForeground(Color.WHITE);
         backButton.addActionListener(e -> {
-            new MenuUI(user,business,business.getMenu(),this.getLocation());
+            new MenuUI(user,business,business.getMenu(),app,this.getLocation());
             dispose();
         });
 
@@ -49,7 +50,7 @@ public class BasketUI extends JFrame{
                         basket.clearBasket();
                         business.addToTaskList(order);
                         ((Customer) user).getOrderHistory().addOrder(order);
-                        new BusinessUI((Customer)user, business,this.getLocation());
+                        new BusinessUI((Customer)user, business,app,this.getLocation());
                         dispose();
                     }
                     else{
@@ -63,7 +64,7 @@ public class BasketUI extends JFrame{
                     Map<Integer, ArrayList<Dish>> dishesByTable = new HashMap<>();
 
                     for (Dish dish : basket.getBasket()) {
-                        int tableId = dish.getId();
+                        int tableId = dish.getTable().getTableId();
                         // Check if the table ID already exists in the map
                         if (dishesByTable.containsKey(tableId)) {
                             // If the table ID exists, add the dish to the existing list
@@ -82,12 +83,13 @@ public class BasketUI extends JFrame{
 
                         Order order = new Order();
                         order.createOrder(dishesForTable);
+                        order.setTableId(entry.getKey());
                         business.addToTaskList(order);
                     }
 
                     basket.clearBasket();
 
-                    new DashboardUI(user, business,this.getLocation());
+                    new DashboardUI(user, business,app,this.getLocation());
                     dispose();
                 }
         });

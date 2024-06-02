@@ -1,6 +1,7 @@
 package GUI;
 
 import business.Business;
+import business.DineEase;
 import business.ordering.*;
 import business.ordering.Menu;
 import users.Customer;
@@ -12,7 +13,9 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 public class SuggestionsUI extends JFrame {
-    public SuggestionsUI(Customer user, Business business, Point location) {
+    DineEase app;
+    public SuggestionsUI(Customer user, Business business, DineEase dineEase, Point location) {
+        app = dineEase;
         setTitle("SuggestionsUI");
         setSize(460,680);
         setLocation(location);
@@ -37,7 +40,7 @@ public class SuggestionsUI extends JFrame {
         backButton.setBackground(Color.BLUE);
         backButton.setForeground(Color.WHITE);
         backButton.addActionListener(e -> {
-            new BusinessUI((Customer) user,business,this.getLocation());
+            new BusinessUI((Customer) user,business,app,this.getLocation());
             dispose();
         });
 
@@ -57,7 +60,7 @@ public class SuggestionsUI extends JFrame {
         dishButton.setBackground(Color.BLUE);
         dishButton.setForeground(Color.WHITE);
         dishButton.addActionListener((ActionEvent e) -> {
-            new DishUI(user, business, dish, this.getLocation());
+            new DishUI(user, business, dish,app, this.getLocation());
             dispose();
         });
 
